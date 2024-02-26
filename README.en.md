@@ -18,11 +18,14 @@
 
 ## Features
 
-- Easy to use, one command, renew SSL certificates in one minute.
-- No need to modify any nginx configuration.
-- Seamless support for complex configurations in production environments.
-- Support for multiple domains and multiple server nodes.
-- Certificate monitoring feature, providing WeChat public account push reminders for certificates about to expire.
+- **Easy to use:** One command, effortlessly manage SSL certificate automatic renewal.
+- **Certificate auto-updating and automatic renewal.**
+- **Seamless integration:** No need to modify Nginx configuration, especially suitable for smooth transitions in old systems and online business operations.
+- **Support for wildcard domains.**
+- **Support for multiple domains and multiple server nodes.**
+- **Certificate monitoring feature:** Provides WeChat public account push reminders for certificates about to expire.
+- **Compatible with mainstream Linux systems.**
+- **Trusted by numerous small and medium-sized enterprises for its stability, security, and reliability.**
 
 # Quick Start
 
