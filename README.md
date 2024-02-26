@@ -81,4 +81,5 @@ _acme-challenge.******.cn >> 043a438043a438d40c.httpsok.com
 
 作者微信 请备注 `来自httpsok`
 
-![httpsok作者微信](https://fposter.cn/dassets/qrcode.png)
+
+<p align="center"><img width="300" src="https://fposter.cn/dassets/qrcode.png" alt="httpsok logo"></p>
