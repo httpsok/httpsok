@@ -6,7 +6,7 @@
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.7.1
+VER=1.7.2
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -312,7 +312,7 @@ _check_token() {
 
 _preparse() {
   _initparams
-  config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" | cat | grep -v 'SERVER_')
+  config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" "/www/server/panel/vhost/nginx" | cat | grep -v 'SERVER_')
   preparse=$(_post "/preparse" "$config_text")
   if [ "$preparse" = "" ]; then
     return 4
