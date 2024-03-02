@@ -1,13 +1,13 @@
 <p align="center"><a href="https://fposter.cn/doc/" target="_blank"><img width="168" src="https://fposter.cn/dassets/httpsok-logo.png" alt="httpsok logo"></a></p>
 
 <p align="center">
-  <!--
+  <!-- 
 <a href="https://github.com/httpsok/httpsok" class="link github-link" target="_blank"><img style="max-width: 100px;" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/httpsok/httpsok?style=social"></a>
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
     -->
   <img alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="version" src="https://img.shields.io/badge/version-1.7.1-brightgreen">
+  <img alt="version" src="https://img.shields.io/badge/version-1.7.2-brightgreen">
 </p>
 
 ## 介绍
@@ -22,8 +22,8 @@
 
 ## 特性
 
-- 使用简单，一行命令，一分钟轻松解决SSL证书自动续期。
-- 无需修改任何nginx配置。
+- **简单** 一行命令，一分钟轻松解决SSL证书自动续期。
+- **无侵入** 不会修改现有`nginx`配置。
 - 对于复杂配置的生产环境，无缝支持。
 - 多域名、多服务器节点支持。
 - 证书监控功能，对于即将失效的证书，提供公众号推送提醒。
@@ -51,7 +51,7 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 2024-01-21 00:22:56 nginx-config-home: /etc/nginx
 
 Httpsok make SSL easy.     https://fposter.cn/ 
-version: 1.7.1
+version: 1.7.2
 home: /root/.httpsok
 
 2024-01-21 00:22:57 DNS check pass
@@ -64,20 +64,26 @@ home: /root/.httpsok
 ```
 
 
-## DNS配置
+## DNS解析配置
 
 出现如下提示
 
-请添对应的DNS-CNAME解析记录，**只需配置一次即可**。
+请添对应的DNS-CNAME解析记录 参考[DNS解析](https://fposter.cn/doc/guide/dns.md)，**只需配置一次即可**。
 
-**解决方案：** 参考[DNS解析](https://fposter.cn/doc/guide/dns.html)
+**添加成功后请稍等1分钟左右**（DNS生效需要一小会儿），再次运行安装脚本即可。
 
 ```bash
-DNS-CNAME解析无效 参考：https://fposter.cn/doc/guide/dns.html?code=1361fd24380436d44ea
+DNS-CNAME解析无效 参考：https://fposter.cn/doc/guide/dns.html
 请添以下DNS-CNAME解析记录（只需配置一次即可）: 
 
-_acme-challenge.******.cn >> 043a438043a438d40c.httpsok.com
+_acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
+
 ```
+
+生成的证书示例
+
+![image-20240229164416731](https://fposter.cn/dassets/image-20240229164416731.png)
+
 
 ## 问题反馈
 

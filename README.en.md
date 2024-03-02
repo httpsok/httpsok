@@ -3,7 +3,7 @@
 <p align="center">
   <img alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="version" src="https://img.shields.io/badge/version-1.7.1-brightgreen">
+  <img alt="version" src="https://img.shields.io/badge/version-1.7.2-brightgreen">
 </p>
 
 ## Introduction
@@ -48,7 +48,7 @@ After successful installation, it will automatically check the `nginx` certifica
 2024-01-21 00:22:56 nginx-config-home: /etc/nginx
 
 Httpsok makes SSL easy.     https://fposter.cn/ 
-version: 1.7.1
+version: 1.7.2
 home: /root/.httpsok
 
 2024-01-21 00:22:57 DNS check pass
