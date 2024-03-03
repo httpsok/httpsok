@@ -45,8 +45,6 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 
 > 登陆控制台 👉 👉 [获取token](https://fposter.cn/console/)
 
-## 安装成功
-
 安装成功后，会自动检测一次系统中的`nginx`证书。
 
 ```bash
@@ -72,7 +70,7 @@ home: /root/.httpsok
 
 出现如下提示
 
-请添对应的DNS-CNAME解析记录 参考[DNS解析](https://fposter.cn/doc/guide/dns.md)，**只需配置一次即可**。
+请添对应的DNS-CNAME解析记录 参考[DNS解析配置](https://fposter.cn/doc/guide/dns.html)，**只需配置一次即可**。
 
 **添加成功后请稍等1分钟左右**（DNS生效需要一小会儿），再次运行安装脚本即可。
 
