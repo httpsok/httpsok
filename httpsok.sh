@@ -365,7 +365,7 @@ __process_include() {
 
         # Ignore mime.types
         if($0 ~ /mime\.types;/){
-          print "#>> " original
+          print "# " original
           next
         }
 
@@ -390,7 +390,7 @@ __process_include() {
           $2 = NGINX_CONFIG_HOME "/" $2
         }
 
-        print "#>> " original
+        print "# " original
 
         # The second way
         # find . -maxdepth 1 -print0 | xargs -0 command
