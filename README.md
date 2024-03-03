@@ -48,21 +48,23 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 安装成功后，会自动检测一次系统中的`nginx`证书。
 
 ```bash
-2024-01-21 00:22:56 os-name: TencentOS Server 2.4
-2024-01-21 00:22:56 version: nginx/1.20.1
-2024-01-21 00:22:56 nginx-config-home: /etc/nginx
+2024-03-04 04:54:23 os-name: TencentOS Server 2.4
+2024-03-04 04:54:23 version: nginx/1.20.1
+2024-03-04 04:54:23 nginx-config: /etc/nginx/nginx.conf
+2024-03-04 04:54:23 nginx-config-home: /etc/nginx
 
 Httpsok make SSL easy.     https://fposter.cn/ 
 version: 1.8.0
+TraceID: 92592593890e8a442be7f50c7ddc5d2d
 home: /root/.httpsok
 
-2024-01-21 00:22:57 DNS check pass
-2024-01-21 00:22:57 cdb8e6b945154127 /etc/nginx/certs/api.fastposter.net_nginx/api.fastposter.net_bundle.crt Cert valid
-2024-01-21 00:22:58 e29c94e6c2504f37 /etc/nginx/certs/cloud.fastposter.net_nginx/cloud.fastposter.net_bundle.crt Cert valid
-2024-01-21 00:22:58 32614897bc364812 /etc/nginx/certs/fastposter.net_nginx/fastposter2.net_bundle.crt Cert valid
-2024-01-21 00:22:58 7b9be1c745cb41f8 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid
+2024-03-04 04:54:24 DNS check pass
+2024-03-04 04:54:24 71e1bbd5f2e5415e /etc/nginx/certs/api.fastposter.net_nginx/api.fastposter.net_bundle.crt Cert valid
+2024-03-04 04:54:24 f5f7b9c586a14907 /etc/nginx/certs/cloud.fastposter.net_nginx/cloud.fastposter.net_bundle.crt Cert valid
+2024-03-04 04:54:24 922c8597778a434d /etc/nginx/certs/fastposter.net_nginx/fastposter2.net_bundle.crt Cert valid
+2024-03-04 04:54:24 ee262ecba47d4173 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid
 
-2024-01-21 00:22:58 Nginx reload needless.
+2024-03-04 04:54:24 Nginx reload needless.
 ```
 
 
