@@ -7,7 +7,7 @@
     -->
   <img alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="version" src="https://img.shields.io/badge/version-1.7.2-brightgreen">
+  <img alt="version" src="https://img.shields.io/badge/version-1.8.0-brightgreen">
 </p>
 
 ## 介绍
@@ -22,12 +22,14 @@
 
 ## 特性
 
-- **简单** 一行命令，一分钟轻松解决SSL证书自动续期。
-- **无侵入** 不会修改现有`nginx`配置。
-- 对于复杂配置的生产环境，无缝支持。
-- 多域名、多服务器节点支持。
-- 证书监控功能，对于即将失效的证书，提供公众号推送提醒。
+- **简单** 一行命令，一分钟轻松解决SSL证书自动续期
+- **无侵入** 不会修改现有`nginx`配置
+- **适配强** 适配主流的Linux操作面板，如`宝塔`、`cPanel`、`AMH`、`1Panel`等
+- 对于复杂配置的生产环境，无缝支持
+- 易操作多域名、多服务器节点支持
+- 证书监控功能，对于即将失效的证书，提供公众号推送提醒
 - 支持主流Linux系统
+
 
 # 快速开始
 
@@ -51,7 +53,7 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 2024-01-21 00:22:56 nginx-config-home: /etc/nginx
 
 Httpsok make SSL easy.     https://fposter.cn/ 
-version: 1.7.2
+version: 1.8.0
 home: /root/.httpsok
 
 2024-01-21 00:22:57 DNS check pass

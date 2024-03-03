@@ -6,7 +6,7 @@
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.7.2
+VER=1.8.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -26,7 +26,9 @@ latest_code=""
 preparse=""
 OS=""
 NGINX_VERSION=""
+NGINX_CONFIG=""
 NGINX_CONFIG_HOME=""
+TRACE_ID=""
 
 _upper_case() {
   tr '[a-z]' '[A-Z]'
@@ -75,6 +77,12 @@ _suc() {
   echo -e "\033[32m$(date +"%F %T") $@\033[0m"  1>&2
 }
 
+_random_md5() {
+  head -c 32 /dev/urandom | md5sum | awk '{print $1}'
+}
+
+TRACE_ID=$(_random_md5)
+
 _exists() {
   cmd="$1"
   if [ -z "$cmd" ]; then
@@ -97,6 +105,7 @@ showWelcome() {
   echo
   echo -e "\033[1;36mHttpsok make SSL easy.     $HTTPSOK_HOME_URL \033[0m"
   echo -e "\033[1;36mversion: $VER\033[0m"
+  echo -e "\033[1;36mTraceID: $TRACE_ID\033[0m"
   echo "home: $PROJECT_HOME"
   echo
 }
@@ -146,17 +155,16 @@ _initparams() {
 
   NGINX_VERSION=$($nginx_bin -v 2>&1 | awk -F ': ' '{print $2}' | head -c 20)
 
-  # Find nginx in use first
-  NGINX_CONFIG_HOME=$(ps -eo pid,cmd | grep nginx | grep master | grep '\-c' | awk -F '-c' '{print $2}' | sed 's/ //g')
-  if [ -n "$NGINX_CONFIG_HOME" ]; then
-    NGINX_CONFIG_HOME=$(dirname "$NGINX_CONFIG_HOME")
+  # Use a running nginx first
+  NGINX_CONFIG=$(ps -eo pid,cmd | grep nginx | grep master | grep '\-c' | awk -F '-c' '{print $2}' | sed 's/ //g')
+  if [ -z "$NGINX_CONFIG" ]; then
+    NGINX_CONFIG=$($nginx_bin -t 2>&1 | grep 'configuration' | head -n 1 | awk -F 'file' '{print $2}' | awk '{print $1}' )
   fi
-  if [ -z "$NGINX_CONFIG_HOME" ]; then
-    NGINX_CONFIG_HOME=$(dirname $($nginx_bin -t 2>&1 | grep 'configuration' | head -n 1 | awk -F 'file' '{print $2}' | awk '{print $1}' ))
-  fi
+  NGINX_CONFIG_HOME=$(dirname "$NGINX_CONFIG")
 
   _info "os-name: $OS"
   _info "version: $NGINX_VERSION"
+  _info "nginx-config: $NGINX_CONFIG"
   _info "nginx-config-home: $NGINX_CONFIG_HOME"
   showWelcome
 }
@@ -168,19 +176,21 @@ _inithttp() {
   _H3="os-name: $OS"
   _H4="nginx-version: $NGINX_VERSION"
   _H5="nginx-config-home: $NGINX_CONFIG_HOME"
+  _H6="nginx-config: $NGINX_CONFIG"
+  _H7="trace-id: $TRACE_ID"
 }
 
 _post() {
   _inithttp
   url="${BASE_API_URL}$1"
   body="$2"
-  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" --data-binary "$body" "$url"
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" --data-binary "$body" "$url"
 }
 
 _get() {
   _inithttp
   url="${BASE_API_URL}$1"
-  curl -s -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" "$url"
+  curl -s -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" "$url"
 }
 
 _upload() {
@@ -188,14 +198,14 @@ _upload() {
   url="${BASE_API_URL}/upload?code=$1"
   _F1="cert=@\"$2\""
   _F2="certKey=@\"$3\""
-  curl -s -X POST -H "Content-Type: multipart/form-data" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -F $_F1 -F $_F2 "$url" 2>&1
+  curl -s -X POST -H "Content-Type: multipart/form-data" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -F $_F1 -F $_F2 "$url" 2>&1
 }
 
 _put() {
   _inithttp
   url="${BASE_API_URL}$1"
   body="$2"
-  curl -s -X PUT -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" --data-binary "$body" "$url"
+  curl -s -X PUT -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" --data-binary "$body" "$url"
 }
 
 _remote_log() {
@@ -310,9 +320,128 @@ _check_token() {
   return 0
 }
 
+
+# Limit the maximum nesting level
+_include_max_calls=5
+_include_global_count=0
+
+
+__process_include() {
+
+  if [ $_include_global_count -ge $_include_max_calls ]; then
+      # echo "Maximum recursion limit reached."
+      cat /dev/stdin
+      return 0
+  else
+      # Recursive call, degree incremented by one
+      ((global_count++))
+  fi
+
+  tmp=$(cat /dev/stdin | awk -v NGINX_CONFIG=">$NGINX_CONFIG:" -v NGINX_CONFIG_HOME="$NGINX_CONFIG_HOME" '{
+
+      original = $0
+
+      # Remove leading and trailing whitespace characters from each line
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "")
+
+      # Ignore the lines at the beginning of the file
+      if ($0 ~ /^>/) {
+        print original
+        next
+      }
+
+      # Determines if it starts with #, and if it does, ignores it
+      if ($0 ~ /^#/) {
+
+        # Replace the include in the comment
+        gsub("include", "import")
+
+        print original
+        next
+      }
+
+      # Determine whether include is included
+      if ($0 ~ /^include /) {
+
+        # Ignore mime.types
+        if($0 ~ /mime\.types;/){
+          print "#>> " original
+          next
+        }
+
+        # print "imported " $2
+
+        # system("cat " $2)
+        # print ">>  "
+
+        # ls /etc/nginx/conf.d/*.conf | xargs -I {} sed  "s|^|{}:|" {}
+        # system("ls " $2 " | xargs -I {} sed  \"s|^|{}:|\" {}")
+
+        # /etc/nginx/conf.d/*.conf;
+        # Replace ;
+        gsub(/;/, "")
+
+        # /etc/nginx/conf.d/*.conf
+        # Resolved to an include file
+        # print $2
+
+        # Deal with relative path issues
+        if (substr($2, 1, 1) != "/") {
+          $2 = NGINX_CONFIG_HOME "/" $2
+        }
+
+        print "#>> " original
+
+        # The second way
+        # find . -maxdepth 1 -print0 | xargs -0 command
+        # system("find " $2 " -maxdepth 1 -print0  | xargs  -0 -I {} sed \"s|^|>{}:|\" {}")
+
+        # just backup
+        # system("ls -1 " $2 " | xargs -I {} sed \"s|^|>{}:|\" {}")
+
+        # If the last line of the file is not newline, the file will not be parsed correctly
+        # system("ls -1 " $2 " 2>/dev/null | xargs -I {} cat {} ")
+
+        # Using sh has security implications deprecated
+        system("ls -1 " $2 " 2>/dev/null | xargs -I {} sh -c \"cat {} && echo\" ")
+
+        #
+        system("ls -1 " $2 " 2>/dev/null | xargs -I {} sed -n \"$p\" {} ")
+        print ""
+
+        next
+      }
+
+      print original
+
+    }'
+
+  )
+
+
+  if echo "$tmp" | grep -v '#' | grep -q "include"; then
+    # Perform a recursive call
+    echo "$tmp" | __process_include
+  else
+    # End the recursive call
+    echo "$tmp"
+  fi
+}
+
+__process_format(){
+  cat /dev/stdin | awk -v NGINX_CONFIG="$NGINX_CONFIG:" '{
+      gsub("import", "include")
+      # print NGINX_CONFIG $0
+      print $0
+  }'
+}
+
 _preparse() {
   _initparams
-  config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" "/www/server/panel/vhost/nginx" | cat | grep -v 'SERVER_')
+
+  config_text=$(cat $NGINX_CONFIG | __process_include | __process_format)
+  # exit
+  # config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" "/www/server/panel/vhost/nginx" "/usr/local/*/vhost/" "/home/wwwroot/*/vhost/" "/home/wwwroot/*/etc/" | cat | grep -v 'SERVER_')
   preparse=$(_post "/preparse" "$config_text")
   if [ "$preparse" = "" ]; then
     return 4
@@ -606,7 +735,11 @@ uninstallcronjob() {
 _run() {
   _load_token
   _check_token
-  _preparse
+  if ! _preparse ; then
+    _err "未检测到SSL证书"
+    echo ""
+    return 4
+  fi
   _upload_certs
   _check_dns
   _check_certs
