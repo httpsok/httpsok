@@ -761,7 +761,8 @@ _run() {
   _load_token
   _check_token
   if ! _preparse ; then
-    _err "未检测到SSL证书"
+    _err "未检测到SSL证书。\n "
+    _info "请您先进行基本配置，配置请参考 https://fposter.cn/doc/reference/nginx-config.html "
     echo ""
     return 4
   fi
