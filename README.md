@@ -62,8 +62,6 @@ home: /root/.httpsok
 
 2024-03-04 04:54:24 DNS check pass
 2024-03-04 04:54:24 71e1bbd5f2e5415e /etc/nginx/certs/api.fastposter.net_nginx/api.fastposter.net_bundle.crt Cert valid
-2024-03-04 04:54:24 f5f7b9c586a14907 /etc/nginx/certs/cloud.fastposter.net_nginx/cloud.fastposter.net_bundle.crt Cert valid
-2024-03-04 04:54:24 922c8597778a434d /etc/nginx/certs/fastposter.net_nginx/fastposter2.net_bundle.crt Cert valid
 2024-03-04 04:54:24 ee262ecba47d4173 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid
 
 2024-03-04 04:54:24 Nginx reload needless.
@@ -92,7 +90,7 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 ## 问题反馈
 
-欢迎大家添加作者微信，一起
+欢迎大家添加作者微信，共同交流一些技术、想法。
 
 作者微信 请备注 `来自httpsok`
 
