@@ -86,7 +86,7 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 ## 完成
 
-没错，已经结束了，证书自动续期就这么简单。
+没错，已经结束了，SSL证书自动续期就应该这么简单。
 
 ## 问题反馈
 
