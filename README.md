@@ -82,10 +82,9 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 ```
 
-生成的证书示例
+## 完成
 
-![image-20240229164416731](https://fposter.cn/dassets/image-20240229164416731.png)
-
+没错，已经结束了，证书自动续期就这么简单。
 
 ## 问题反馈
 

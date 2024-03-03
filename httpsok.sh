@@ -354,7 +354,7 @@ __process_include() {
       if ($0 ~ /^#/) {
 
         # Replace the include in the comment
-        gsub("include", "import")
+        # gsub("include", "import")
 
         print original
         next
@@ -369,7 +369,8 @@ __process_include() {
           next
         }
 
-        # print "imported " $2
+        # print "#import " $2
+        print "#import " original
 
         # system("cat " $2)
         # print ">>  "
@@ -390,7 +391,7 @@ __process_include() {
           $2 = NGINX_CONFIG_HOME "/" $2
         }
 
-        print "# " original
+        # print "# " original
 
         # The second way
         # find . -maxdepth 1 -print0 | xargs -0 command
@@ -403,10 +404,34 @@ __process_include() {
         # system("ls -1 " $2 " 2>/dev/null | xargs -I {} cat {} ")
 
         # Using sh has security implications deprecated
-        system("ls -1 " $2 " 2>/dev/null | xargs -I {} sh -c \"cat {} && echo\" ")
+        # system("ls -1 " $2 " 2>/dev/null | xargs -I {} sh -c \"cat {} && echo\" ")
 
         #
-        system("ls -1 " $2 " 2>/dev/null | xargs -I {} sed -n \"$p\" {} ")
+        # system("ls -1 " $2 " 2>/dev/null | xargs -I {} sed -n \"$p\" {} ")
+
+        # xargs -I {} awk -v FP="{}"  "BEGIN{ print \"# include \" FP } {print} END{print ""} " {}
+        #system("ls -1 " $2 " 2>/dev/null | xargs -I {} awk \" {print} END {print \"\" } \" {} ")
+        #
+        # cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk \" {print} END {print \"\\\"\"\n\"\\\"\" } \" {} "
+
+        # cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk \"BEGIN {print \"\"{}\"\" } {print} END {print \n } \" {} "
+
+        # OK Add a newline character to the end of the file
+        # cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk \" {print} END {print \"\\n\" } \" {} "
+
+        # OK Add a newline character to the end of the file
+        # cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk '\'' {print} '\'' {} "
+
+        # OK add config file path
+        #cmd = "ls -1 " $2 " 2>/dev/null | xargs -I GG awk '\'' BEGIN {print \"#included GG;\" } {print} '\'' GG "
+        #cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk '\'' BEGIN {print \"#included {};\" } {print} '\'' {} "
+
+
+        cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk '\'' BEGIN {print \"#included-begin {};\" } {print}  END{ print \"#included-end {};\"  } '\'' {} "
+
+        # print cmd
+        system(cmd)
+
         print ""
 
         next
@@ -430,7 +455,7 @@ __process_include() {
 
 __process_format(){
   cat /dev/stdin | awk -v NGINX_CONFIG="$NGINX_CONFIG:" '{
-      gsub("import", "include")
+      # gsub("import", "include")
       # print NGINX_CONFIG $0
       print $0
   }'
