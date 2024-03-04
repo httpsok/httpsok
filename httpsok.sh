@@ -123,6 +123,15 @@ _initpath() {
   _mkdirs "$PROJECT_HOME"
 }
 
+_no_nginx_here(){
+  echo
+  _err "未检测到nginx命令\n"
+  _err "请您先确认系统是否已经成功安装nginx服务 "
+  echo
+  echo
+  exit
+}
+
 _initparams() {
 
   if [ "$OS" != "" ]; then
@@ -149,7 +158,16 @@ _initparams() {
       pid=$(ps -e | grep nginx | grep -v 'grep' | head -n 1 | awk '{print $1}')
       if [ -n "$pid" ]; then
           nginx_bin=$(readlink -f /proc/"$pid"/exe)
-          echo "Nginx executable path: $nginx_bin"
+          echo ">>> nginx_bin=$nginx_bin"
+          # again to verify
+          $nginx_bin -V > /dev/null 2>&1
+          if [ $? -ne 0 ]; then
+            _no_nginx_here
+          else
+            echo "Nginx executable path: $nginx_bin"
+          fi
+      else
+        _no_nginx_here
       fi
   fi
 
@@ -365,7 +383,7 @@ __process_include() {
 
         # Ignore mime.types
         if($0 ~ /mime\.types;/){
-          print "# " original
+          print "#import " original
           next
         }
 
