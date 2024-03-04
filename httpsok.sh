@@ -162,7 +162,7 @@ _initparams() {
           # again to verify
           $nginx_bin -V > /dev/null 2>&1
           if [ $? -ne 0 ]; then
-            _no_nginx_here
+            _no_nginx_here 
           else
             echo "Nginx executable path: $nginx_bin"
           fi
@@ -444,12 +444,10 @@ __process_include() {
         #cmd = "ls -1 " $2 " 2>/dev/null | xargs -I GG awk '\'' BEGIN {print \"#included GG;\" } {print} '\'' GG "
         #cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk '\'' BEGIN {print \"#included {};\" } {print} '\'' {} "
 
-
         cmd = "ls -1 " $2 " 2>/dev/null | xargs -I {} awk '\'' BEGIN {print \"#included-begin {};\" } {print}  END{ print \"#included-end {};\"  } '\'' {} "
 
         # print cmd
         system(cmd)
-
         print ""
 
         next
@@ -484,7 +482,7 @@ _preparse() {
 
   config_text=$(cat $NGINX_CONFIG | __process_include | __process_format)
   # exit
-  # config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" "/www/server/panel/vhost/nginx" "/usr/local/*/vhost/" "/home/wwwroot/*/vhost/" "/home/wwwroot/*/etc/" | cat | grep -v 'SERVER_')
+  # config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" | cat | grep -v 'SERVER_')
   preparse=$(_post "/preparse" "$config_text")
   if [ "$preparse" = "" ]; then
     return 4
