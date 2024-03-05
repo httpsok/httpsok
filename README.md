@@ -33,7 +33,7 @@
 
 别看新特性了， **[快来试试吧😄😄](https://fposter.cn/doc/guide/quickstart.html)**
 
-# 快速开始
+## 快速开始
 
 忘掉繁琐的证书续签操作，让证书续签回归应有的简单。
 
