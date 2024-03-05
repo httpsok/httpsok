@@ -18,14 +18,14 @@
 
 ## Features
 
-- **Easy to use:** One command, effortlessly manage SSL certificate automatic renewal.
-- **Certificate auto-updating and automatic renewal.**
-- **Seamless integration:** No need to modify Nginx configuration, especially suitable for smooth transitions in old systems and online business operations.
-- **Support for wildcard domains.**
-- **Support for multiple domains and multiple server nodes.**
-- **Certificate monitoring feature:** Provides WeChat public account push reminders for certificates about to expire.
-- **Compatible with mainstream Linux systems.**
-- **Trusted by numerous small and medium-sized enterprises for its stability, security, and reliability.**
+- **⚡️ Simple and Efficient**: Easily renew SSL certificates with just one command in one minute.
+- **✅ Non-intrusive**: Does not modify the existing `nginx` configuration in the system.
+- **✅ Automatic Detection**: Seamless support for production environments with old systems and complex configurations, effortlessly detecting and supporting them.
+- **✅ Multi-server Support**: Supports multiple servers with multiple domain names.
+- **✅ Wildcard and Multi-level Domain Support**: Easily handles domain wildcard resolution and multi-level domain names.
+- **✅ Certificate Monitoring**: Provides WeChat public account push notifications for expiring certificates.
+- **✅ Excellent Compatibility**: Compatible with mainstream Linux systems, including `CentOS` and `TencentOS`.
+- **✅ Panel Adaptation**: Compatible with popular Linux operation panels such as `Baota`, `AMH`, `cPanel`, and more.
 
 # Quick Start
 
@@ -55,8 +55,6 @@ home: /root/.httpsok
 
 2024-03-04 04:54:24 DNS check pass
 2024-03-04 04:54:24 71e1bbd5f2e5415e /etc/nginx/certs/api.fastposter.net_nginx/api.fastposter.net_bundle.crt Cert valid
-2024-03-04 04:54:24 f5f7b9c586a14907 /etc/nginx/certs/cloud.fastposter.net_nginx/cloud.fastposter.net_bundle.crt Cert valid
-2024-03-04 04:54:24 922c8597778a434d /etc/nginx/certs/fastposter.net_nginx/fastposter2.net_bundle.crt Cert valid
 2024-03-04 04:54:24 ee262ecba47d4173 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid
 
 2024-03-04 04:54:24 Nginx reload needless.
@@ -79,6 +77,6 @@ _acme-challenge.******.cn >> 043a438043a438d40c.httpsok.com
 
 ## Issue Feedback
 
-Author's WeChat: Please mention `来自httpsok`
+Author's WeChat: Please mention `httpsok`
 
 <p align="center"><img width="168" src="https://fposter.cn/dassets/qrcode.png" alt="httpsok logo"></p>
