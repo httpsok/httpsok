@@ -49,7 +49,6 @@ TraceID: 92592593890e8a442be7f50c7ddc5d2d
 home: /root/.httpsok
 
 2024-03-04 04:54:24 DNS check pass
-2024-03-04 04:54:24 71e1bbd5f2e5415e /etc/nginx/certs/api.fastposter.net_nginx/api.fastposter.net_bundle.crt Cert valid
 2024-03-04 04:54:24 ee262ecba47d4173 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid
 
 2024-03-04 04:54:24 Nginx reload needless.
