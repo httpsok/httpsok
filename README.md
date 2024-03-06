@@ -48,11 +48,6 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 安装成功后，会自动检测一次系统中的`nginx`证书。
 
 ```bash
-2024-03-04 04:54:23 os-name: TencentOS Server 2.4
-2024-03-04 04:54:23 version: nginx/1.20.1
-2024-03-04 04:54:23 nginx-config: /etc/nginx/nginx.conf
-2024-03-04 04:54:23 nginx-config-home: /etc/nginx
-
 Httpsok make SSL easy.     https://fposter.cn/ 
 version: 1.8.0
 TraceID: 92592593890e8a442be7f50c7ddc5d2d
