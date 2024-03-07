@@ -24,7 +24,7 @@
 - ✅ **Automatic Detection**: No need to worry about Nginx configuration; it automatically identifies certificate configurations, suitable for older systems and complex production environments.
 - ✅ **Wildcard Resolutions, Multiple Domains, Multiple Servers**: Easily handle diverse scenarios.
 - ✅ **Certificate Monitoring**: Provides push notifications via public accounts for certificates approaching expiration.
-- ✅ **Good Compatibility**: Compatible with mainstream Linux systems such as `CentOS`, `Ubuntu`, and `TencentOS`.
+- ✅ **Good Compatibility**: Compatible with mainstream Linux systems such as `AlibabaCloud` `Debain` `CentOS` `Ubuntu` `TencentOS`.
 
 # Quick Start
 
