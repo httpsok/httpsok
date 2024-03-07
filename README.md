@@ -40,7 +40,7 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 
 ```bash
 Httpsok make SSL easy.     https://fposter.cn/ 
-version: 1.8.0
+version: 1.8.1
 TraceID: 92592593890e8a442be7f50c7ddc5d2d
 home: /root/.httpsok
 
