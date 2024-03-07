@@ -34,8 +34,7 @@
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 ```
 
-
-> Login to the console 👉 👉 [获取token](https://fposter.cn/console/)
+> Login to the console 👉 👉 [Get your token](https://fposter.cn/console/)
 
 ## Installation Success
 
