@@ -28,9 +28,7 @@
 
 ## 快速开始
 
-忘掉繁琐的证书续签操作，让证书续签回归应有的简单。
-
-## 安装httpsok
+### 安装httpsok
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
@@ -53,7 +51,7 @@ home: /root/.httpsok
 ```
 
 
-## DNS解析配置
+### DNS解析配置
 
 出现如下提示
 
@@ -68,7 +66,7 @@ DNS-CNAME解析无效 参考：https://fposter.cn/doc/guide/dns.html
 _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 ```
 
-## 完成
+### 完成
 
 没错，已经结束了，**SSL证书自动续签就应该这么简单**。
 
