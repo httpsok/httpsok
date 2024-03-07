@@ -24,7 +24,7 @@
 - **✅ 自动检测** 无需关心nginx配置，自动识别证书配置，适合老旧系统、复杂配置的生产环境
 - **✅ 泛解析、多域名、多服务器** 轻松搞定
 - **✅ 证书监控** 对于即将失效的证书，提供公众号推送提醒
-- **✅ 兼容性好** 兼容主流的Linux系统，`AlibabaCloud` `Debain` `CentOS` `Ubuntu` `TencentOS`
+- **✅ 兼容性好** 兼容主流的Linux系统，`Debain` `CentOS` `Ubuntu` `TencentOS`
 
 ## 快速开始
 
