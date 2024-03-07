@@ -6,7 +6,7 @@
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.8.0
+VER=1.8.1
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -19,7 +19,7 @@ PROJECT_LOG_FILE="$PROJECT_HOME/$PROJECT_NAME.log"
 HTTPSOK_TOKEN=""
 
 HTTPSOK_HOME_URL="https://fposter.cn/"
-BASE_API_URL="https://fposter.cn/v1/nginx/"
+BASE_API_URL="https://fposter.cn/v1/nginx"
 SCRIPT_URL="https://fposter.cn/httpsok.sh"
 
 latest_code=""
@@ -29,6 +29,7 @@ NGINX_VERSION=""
 NGINX_CONFIG=""
 NGINX_CONFIG_HOME=""
 TRACE_ID=""
+MODE="normal"
 
 _upper_case() {
   tr '[a-z]' '[A-Z]'
@@ -106,7 +107,7 @@ showWelcome() {
   echo -e "\033[1;36mHttpsok make SSL easy.     $HTTPSOK_HOME_URL \033[0m"
   echo -e "\033[1;36mversion: $VER\033[0m"
   echo -e "\033[1;36mTraceID: $TRACE_ID\033[0m"
-  echo "home: $PROJECT_HOME"
+  # echo "home: $PROJECT_HOME"
   echo
 }
 
@@ -125,8 +126,8 @@ _initpath() {
 
 _no_nginx_here(){
   echo
-  _err "未检测到nginx命令\n"
-  _err "请您先确认系统是否已经成功安装nginx服务 "
+  _err "Can’t detected nginx\n"
+  _err "Please confirm that nginx has been successfully installed on your system"
   echo
   echo
   exit
@@ -158,7 +159,7 @@ _initparams() {
       pid=$(ps -e | grep nginx | grep -v 'grep' | head -n 1 | awk '{print $1}')
       if [ -n "$pid" ]; then
           nginx_bin=$(readlink -f /proc/"$pid"/exe)
-          echo ">>> nginx_bin=$nginx_bin"
+          # echo "nginx_bin=$nginx_bin"
           # again to verify
           $nginx_bin -V > /dev/null 2>&1
           if [ $? -ne 0 ]; then
@@ -196,19 +197,20 @@ _inithttp() {
   _H5="nginx-config-home: $NGINX_CONFIG_HOME"
   _H6="nginx-config: $NGINX_CONFIG"
   _H7="trace-id: $TRACE_ID"
+  _H8="mode: $MODE"
 }
 
 _post() {
   _inithttp
   url="${BASE_API_URL}$1"
   body="$2"
-  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" --data-binary "$body" "$url"
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "$body" "$url"
 }
 
 _get() {
   _inithttp
   url="${BASE_API_URL}$1"
-  curl -s -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" "$url"
+  curl -s -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" "$url"
 }
 
 _upload() {
@@ -216,14 +218,14 @@ _upload() {
   url="${BASE_API_URL}/upload?code=$1"
   _F1="cert=@\"$2\""
   _F2="certKey=@\"$3\""
-  curl -s -X POST -H "Content-Type: multipart/form-data" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -F $_F1 -F $_F2 "$url" 2>&1
+  curl -s -X POST -H "Content-Type: multipart/form-data" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -F $_F1 -F $_F2 "$url" 2>&1
 }
 
 _put() {
   _inithttp
   url="${BASE_API_URL}$1"
   body="$2"
-  curl -s -X PUT -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" --data-binary "$body" "$url"
+  curl -s -X PUT -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "$body" "$url"
 }
 
 _remote_log() {
@@ -320,6 +322,11 @@ _load_token() {
   fi
 }
 
+_show_token() {
+  _load_token
+  echo -e "Your token is: \033[1;36m$HTTPSOK_TOKEN\033[0m"
+}
+
 _check_token() {
   _token="$1"
   if [ ! "$_token" = "" ]; then
@@ -331,8 +338,10 @@ _check_token() {
   fi
   status=$(_get "/status")
   if [ "$status" != "ok" ]; then
-    _err "Invalid token: $HTTPSOK_TOKEN Please copy your token from '$HTTPSOK_HOME_URL' "
-    _err "$status"
+    # echo -e "\033[1;36mTraceID: $TRACE_ID\033[0m"
+    _err "Invalid token: \033[1;36m$HTTPSOK_TOKEN\033[0m"
+    _info "Please copy your token from '$HTTPSOK_HOME_URL'"
+    echo
     exit 4
   fi
   return 0
@@ -699,14 +708,14 @@ installcronjob() {
     fi
     $_CRONTAB -l | {
       cat
-      echo "$random_minute $random_hour * * * '$PROJECT_ENTRY_BIN' -r >> '$PROJECT_LOG_FILE' 2>&1"
+      echo "$random_minute $random_hour * * * '$PROJECT_ENTRY_BIN' -m -r >> '$PROJECT_LOG_FILE' 2>&1"
     } | $_CRONTAB_STDIN
     _suc "Install cron job complete."
   fi
   if [ "$?" != "0" ]; then
     _err "Install cron job failed. You can add cronjob by yourself."
     _err "Or you can add cronjob by yourself:"
-    _err "$random_minute $random_hour * * * '$PROJECT_ENTRY_BIN' -r >> '$PROJECT_LOG_FILE' 2>&1"
+    _err "$random_minute $random_hour * * * '$PROJECT_ENTRY_BIN' -m -r >> '$PROJECT_LOG_FILE' 2>&1"
     return 1
   fi
 }
@@ -777,8 +786,8 @@ _run() {
   _load_token
   _check_token
   if ! _preparse ; then
-    _err "未检测到SSL证书。\n "
-    _info "请您先进行基本配置，配置请参考 https://fposter.cn/doc/reference/nginx-config.html "
+    _err "No SSL certificate was detected.\n "
+    _info "Please refer to resolve the issue. https://fposter.cn/doc/reference/nginx-config.html "
     echo ""
     return 4
   fi
@@ -800,18 +809,6 @@ _process() {
         version
         return
         ;;
-      --install | -i)
-        _install
-        return
-        ;;
-      --uninstall | -u)
-        _uninstall
-        return
-        ;;
-      --token | -t)
-        _save_token "$2"
-        shift 1
-        ;;
       --run | -r)
         _run
         ;;
@@ -819,7 +816,26 @@ _process() {
         _save_token "$2"
         _install
         _run
-        shift 1
+        return
+        ;;
+      --token | -t)
+        if [ "$2" ]; then
+          _save_token "$2"
+        else
+          _show_token
+        fi
+        return
+        ;;
+      --mode | -m)
+        MODE="crontab"
+        ;;
+      --install | -i)
+        _install
+        return
+        ;;
+      --uninstall | -u)
+        _uninstall
+        return
         ;;
       *)
         echo "Unknown parameter : $1 $2"
@@ -836,11 +852,12 @@ showhelp() {
 Commands:
   -h, --help               Show this help message.
   -v, --version            Show version info.
-  -i, --install            Install $PROJECT_NAME to your system.
-  -u, --uninstall          Uninstall $PROJECT_NAME in your system.
-  -t, --token              Set the token.
   -r, --run                Run the $PROJECT_NAME
   -s, --setup              Install and run (Recommend first time use it).
+  -t, --token              Set or show the token.
+  -m, --mode               Mode of normal or crontab.
+  -i, --install            Install $PROJECT_NAME to your system.
+  -u, --uninstall          Uninstall $PROJECT_NAME in your system.
 "
   showWelcome
 }
