@@ -8,37 +8,35 @@
   <img alt="version" src="https://img.shields.io/badge/version-1.8.0-brightgreen">
 </p>
 
-## Introduction
+## 介绍
 
-**httpsok** is a convenient HTTPS certificate auto-renewal tool designed specifically for Nginx servers. It has served numerous small and medium-sized enterprises, offering stability, security, and reliability.
+**httpsok** 是一个便捷的 HTTPS 证书自动续签工具，专为 Nginx 服务器设计。已服务众多中小企业，**稳定**、**安全**、**可靠**。
 
-**One command, easily renew SSL certificates**
+**一行命令，一分钟轻松搞定SSL证书自动续期**
 
-## Documentation
+## 文档
 
-- Documentation: [https://fposter.cn/doc/](https://fposter.cn/doc/)
+- 官方帮助文档地址：[https://fposter.cn/doc/](https://fposter.cn/doc/)
 
-## Features
+## 特性
 
-- ⚡️ **Simple and Efficient**: With just one command, effortlessly renew SSL certificates within a minute.
-- ✅ **Automatic Detection**: No need to worry about Nginx configuration; it automatically identifies certificate configurations, suitable for older systems and complex production environments.
-- ✅ **Wildcard Resolutions, Multiple Domains, Multiple Servers**: Easily handle diverse scenarios.
-- ✅ **Certificate Monitoring**: Provides push notifications via public accounts for certificates approaching expiration.
-- ✅ **Good Compatibility**: Compatible with mainstream Linux systems such as `CentOS`, `Ubuntu`, and `TencentOS`.
+- **⚡️ 简单高效** 一行命令，一分钟轻松搞定SSL证书自动续签
+- **✅ 自动检测** 无需关心nginx配置，自动识别证书配置，适合老旧系统、复杂配置的生产环境
+- **✅ 泛解析、多域名、多服务器** 轻松搞定
+- **✅ 证书监控** 对于即将失效的证书，提供公众号推送提醒
+- **✅ 兼容性好** 兼容主流的Linux系统，`CentOS` `Ubuntu` `TencentOS`
 
-# Quick Start
+## 快速开始
 
-## Install httpsok
+### 安装httpsok
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 ```
 
-> Login to the console 👉 👉 [Get your token](https://fposter.cn/console/)
+> 登陆控制台 👉 👉 [获取token](https://fposter.cn/console/)
 
-## Installation Success
-
-After successful installation, it will automatically check the `nginx` certificates in the system.
+安装成功后，会自动检测一次系统中的`nginx`证书。
 
 ```bash
 Httpsok make SSL easy.     https://fposter.cn/ 
@@ -52,23 +50,30 @@ home: /root/.httpsok
 2024-03-04 04:54:24 Nginx reload needless.
 ```
 
-## DNS Configuration
 
-If you encounter the following prompt:
+### DNS解析配置
 
-Please add the corresponding DNS-CNAME resolution record, **only needs to be configured once**.
+出现如下提示
 
-**Solution:** Refer to [DNS Resolution](https://fposter.cn/doc/guide/dns.html)
+请添对应的DNS-CNAME解析记录 参考[DNS解析配置](https://fposter.cn/doc/guide/dns.html)，**只需配置一次即可**。
+
+**添加成功后请稍等1分钟左右**（DNS生效需要一小会儿），再次运行安装脚本即可。
 
 ```bash
-DNS-CNAME resolution invalid. Reference: https://fposter.cn/doc/guide/dns.html?code=1361fd24380436d44ea
-Please add the following DNS-CNAME resolution record (only needs to be configured once):
+DNS-CNAME解析无效 参考：https://fposter.cn/doc/guide/dns.html
+请添以下DNS-CNAME解析记录（只需配置一次即可）: 
 
-_acme-challenge.******.cn >> 043a438043a438d40c.httpsok.com
+_acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 ```
 
-## Issue Feedback
+### 完成
 
-Author's WeChat: Please mention `httpsok`
+没错，已经结束了，**SSL证书自动续签就应该这么简单**。
+
+## 问题反馈
+
+欢迎大家添加作者微信，共同交流一些技术、想法。
+
+作者微信 请备注 `来自httpsok`
 
 <p align="center"><img width="168" src="https://fposter.cn/dassets/qrcode.png" alt="httpsok logo"></p>
