@@ -1,10 +1,8 @@
 <p align="center"><a href="https://fposter.cn/doc/" target="_blank"><img width="168" src="https://fposter.cn/dassets/httpsok-logo.png" alt="httpsok logo"></a></p>
 
 <p align="center">
-  <!-- 
-<a href="https://github.com/httpsok/httpsok" class="link github-link" target="_blank"><img style="max-width: 100px;" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/httpsok/httpsok?style=social"></a>
+  <a href="https://github.com/httpsok/httpsok" class="link github-link" target="_blank"><img style="max-width: 100px;" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/httpsok/httpsok?style=social"></a>
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
-    -->
   <img alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
   <img alt="version" src="https://img.shields.io/badge/version-1.8.0-brightgreen">
