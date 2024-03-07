@@ -74,6 +74,6 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 欢迎大家添加作者微信，共同交流一些技术、想法。
 
-作者微信 请备注 `来自httpsok`
+作者微信 请备注 `httpsok`
 
 <p align="center"><img width="168" src="https://fposter.cn/dassets/qrcode.png" alt="httpsok logo"></p>
