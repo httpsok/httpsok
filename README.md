@@ -5,7 +5,7 @@
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
   <img alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="version" src="https://img.shields.io/badge/version-1.8.0-brightgreen">
+  <img alt="version" src="https://img.shields.io/badge/version-1.8.1-brightgreen">
 </p>
 
 ## 介绍

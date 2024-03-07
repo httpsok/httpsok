@@ -5,7 +5,7 @@
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
   <img alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="version" src="https://img.shields.io/badge/version-1.8.0-brightgreen">
+  <img alt="version" src="https://img.shields.io/badge/version-1.8.1-brightgreen">
 </p>
 
 ## Introduction
@@ -42,7 +42,7 @@ After successful installation, it will automatically check the `nginx` certifica
 
 ```bash
 Httpsok make SSL easy.     https://fposter.cn/ 
-version: 1.8.0
+version: 1.8.1
 TraceID: 92592593890e8a442be7f50c7ddc5d2d
 home: /root/.httpsok
 
