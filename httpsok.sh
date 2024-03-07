@@ -163,7 +163,7 @@ _initparams() {
           # again to verify
           $nginx_bin -V > /dev/null 2>&1
           if [ $? -ne 0 ]; then
-            _no_nginx_here 
+            _no_nginx_here
           else
             echo "Nginx executable path: $nginx_bin"
           fi
@@ -337,6 +337,7 @@ _check_token() {
     exit 4
   fi
   status=$(_get "/status")
+  # _info "status >> $status"
   if [ "$status" != "ok" ]; then
     # echo -e "\033[1;36mTraceID: $TRACE_ID\033[0m"
     _err "Invalid token: \033[1;36m$HTTPSOK_TOKEN\033[0m"
@@ -355,13 +356,16 @@ _include_global_count=0
 
 __process_include() {
 
-  if [ $_include_global_count -ge $_include_max_calls ]; then
-      # echo "Maximum recursion limit reached."
+  # echo "-_include_global_count: $_include_global_count --------------------------------------------------"
+  # echo Recursive call, degree incremented by one
+  ((_include_global_count++))
+
+  if [ $_include_global_count -gt $_include_max_calls ]; then
+      echo "#######################################################"
+      echo "##### warning: Maximum recursion limit reached."
+      echo "#######################################################"
       cat /dev/stdin
       return 0
-  else
-      # Recursive call, degree incremented by one
-      ((global_count++))
   fi
 
   tmp=$(cat /dev/stdin | awk -v NGINX_CONFIG=">$NGINX_CONFIG:" -v NGINX_CONFIG_HOME="$NGINX_CONFIG_HOME" '{
@@ -370,6 +374,7 @@ __process_include() {
 
       # Remove leading and trailing whitespace characters from each line
       gsub(/^[[:space:]]+|[[:space:]]+$/, "")
+      sub(/^[\t ]*|[\t ]*$/,"")
 
       # Ignore the lines at the beginning of the file
       if ($0 ~ /^>/) {
@@ -478,18 +483,18 @@ __process_include() {
   fi
 }
 
-__process_format(){
-  cat /dev/stdin | awk -v NGINX_CONFIG="$NGINX_CONFIG:" '{
-      # gsub("import", "include")
-      # print NGINX_CONFIG $0
-      print $0
-  }'
-}
+# __process_format(){
+#   cat /dev/stdin | awk -v NGINX_CONFIG="$NGINX_CONFIG:" '{
+#       # gsub("import", "include")
+#       # print NGINX_CONFIG $0
+#       print $0
+#   }'
+# }
 
 _preparse() {
   _initparams
-
-  config_text=$(cat $NGINX_CONFIG | __process_include | __process_format)
+  # config_text=$(cat $NGINX_CONFIG | __process_include | __process_format)
+  config_text=$(cat $NGINX_CONFIG | __process_include )
   # exit
   # config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" | cat | grep -v 'SERVER_')
   preparse=$(_post "/preparse" "$config_text")
