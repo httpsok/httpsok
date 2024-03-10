@@ -33,7 +33,7 @@
 登陆控制台 👉 👉 👉 **[获取token](https://fposter.cn/console/)**
 
 ```bash
-curl -s https://fposter.cn/httpsok.sh | bash -s 'token'
+curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 ```
 
 安装成功后，会自动检测一次系统中的`nginx`证书。
@@ -68,7 +68,7 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 ### 完成
 
-没错，已经结束了，**SSL证书自动续签就应该这么简单**。
+没错，已经结束了，SSL证书自动续签就这么简单。
 
 ## 问题反馈
 
