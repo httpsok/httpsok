@@ -24,17 +24,17 @@
 - **✅ 自动检测** 无需关心nginx配置，自动识别证书配置，适合老旧系统、复杂配置的生产环境
 - **✅ 泛解析、多域名、多服务器** 轻松搞定
 - **✅ 证书监控** 对于即将失效的证书，提供公众号推送提醒
-- **✅ 兼容性好** 兼容主流的Linux系统，`Debain` `CentOS` `Ubuntu` `TencentOS`
+- **✅ 兼容性好** 兼容主流的Linux系统和Docker环境
 
 ## 快速开始
 
 ### 安装httpsok
 
-```bash
-curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
-```
+登陆控制台 👉 👉 👉 **[获取token](https://fposter.cn/console/)**
 
-> 登陆控制台 👉 👉 [获取token](https://fposter.cn/console/)
+```bash
+curl -s https://fposter.cn/httpsok.sh | bash -s 'token'
+```
 
 安装成功后，会自动检测一次系统中的`nginx`证书。
 
@@ -57,14 +57,14 @@ home: /root/.httpsok
 
 添加成功后请稍等1分钟左右（DNS生效需要一点时间），再次运行安装脚本即可。
 
-[DNS解析配置参考](https://fposter.cn/doc/guide/dns.html)
-
 ```bash
 DNS-CNAME解析无效 参考：https://fposter.cn/doc/guide/dns.html
 请添以下DNS-CNAME解析记录（只需配置一次即可）: 
 
 _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 ```
+
+[DNS解析配置参考](https://fposter.cn/doc/guide/dns.html)
 
 ### 完成
 
