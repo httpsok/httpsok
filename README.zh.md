@@ -76,4 +76,4 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 作者微信 请备注 `httpsok`
 
-<p align="center"><img width="168" src="https://fposter.cn/dassets/qrcode.png" alt="httpsok logo"></p>
+<img width="168" src="https://fposter.cn/dassets/qrcode.png" alt="httpsok logo">
