@@ -54,9 +54,9 @@ home: /root/.httpsok
 
 ## DNS Configuration
 
-If you encounter the following prompt:
+Add a DNS resolution record of type **CNAME**, and it only needs to be added once.
 
-Please add the corresponding DNS-CNAME resolution record, **only needs to be configured once**.
+**After successful addition, please wait for approximately 1 minute** (it takes a little while for DNS to take effect), and then run the installation script again.
 
 **Solution:** Refer to [DNS Resolution](https://fposter.cn/doc/guide/dns.html)
 
