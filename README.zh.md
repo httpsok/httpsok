@@ -28,7 +28,9 @@
 
 ## 快速开始
 
-### 安装httpsok
+只需二步，轻松搞定SSL证书自动续签。
+
+### 一、安装httpsok
 
 登陆控制台 👉 👉 👉 **[获取token](https://fposter.cn/console/)**
 
@@ -51,7 +53,7 @@ home: /root/.httpsok
 ```
 
 
-### DNS解析配置
+### 二、DNS解析配置
 
 添加一条类型为 **CNAME** 的DNS解析记录，**只需添加一次即可**。
 
@@ -66,7 +68,7 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 [DNS解析配置参考](https://fposter.cn/doc/guide/dns.html)
 
-### 完成
+### 三、完成
 
 没错，已经结束了，SSL证书自动续签就这么简单。
 
