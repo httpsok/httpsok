@@ -10,7 +10,7 @@
 
 ## Introduction
 
-**httpsok** is a convenient HTTPS certificate auto-renewal tool designed specifically for Nginx servers. It has served numerous small and medium-sized enterprises, offering stability, security, and reliability.
+**httpsok** is a convenient HTTPS certificate auto-renewal tool designed specifically for Nginx and OpenResty servers. It has served numerous small and medium-sized enterprises, offering stability, security, and reliability.
 
 **One command, easily renew SSL certificates**
 
