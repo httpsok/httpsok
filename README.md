@@ -53,11 +53,11 @@ home: /root/.httpsok
 
 ### DNS解析配置
 
-出现如下提示
-
-请添对应的DNS-CNAME解析记录 参考[DNS解析配置](https://fposter.cn/doc/guide/dns.html)，**只需配置一次即可**。
+添加一条类型为 **CNAME** 的DNS解析记录，**只需添加一次即可**。
 
 **添加成功后请稍等1分钟左右**（DNS生效需要一小会儿），再次运行安装脚本即可。
+
+[DNS解析配置参考](https://fposter.cn/doc/guide/dns.html)
 
 ```bash
 DNS-CNAME解析无效 参考：https://fposter.cn/doc/guide/dns.html
