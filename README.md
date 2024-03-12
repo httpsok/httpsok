@@ -74,7 +74,7 @@ _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 
 ### 三、完成
 
-没错，已经结束了，SSL证书自动续签就这么简单。
+没错，已经结束，SSL证书自动续签就这么简单。
 
 ## 问题反馈
 
