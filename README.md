@@ -55,7 +55,7 @@ home: /root/.httpsok
 
 ### 二、DNS解析配置
 
-添加一条类型为 **CNAME** 的DNS解析记录，**只需添加一次即可**。
+添加一条DNS解析记录（类型为 **CNAME** ），**只需添加一次即可**。
 
 添加成功后请稍等1分钟左右（DNS生效需要一点时间），再次运行安装脚本即可。
 
@@ -65,6 +65,10 @@ DNS-CNAME解析无效 参考：https://fposter.cn/doc/guide/dns.html
 
 _acme-challenge.yourdomain.com >> 043a438043a438d40c.httpsok.com
 ```
+
+**⚠️主机记录值，不要加自己的一级域名。**
+
+![image-20240312114825019](https://fposter.cn/dassets/image-20240312114825019.png)
 
 [DNS解析配置参考](https://fposter.cn/doc/guide/dns.html)
 
