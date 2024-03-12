@@ -6,7 +6,7 @@
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.8.1
+VER=1.8.2
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -205,6 +205,13 @@ _post() {
   url="${BASE_API_URL}$1"
   body="$2"
   curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "$body" "$url"
+}
+
+_post2() {
+  _inithttp
+  url="${BASE_API_URL}$1"
+  fiename="$2"
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "@$fiename" "$url"
 }
 
 _get() {
@@ -493,11 +500,12 @@ __process_include() {
 
 _preparse() {
   _initparams
-  # config_text=$(cat $NGINX_CONFIG | __process_include | __process_format)
+
   config_text=$(cat $NGINX_CONFIG | __process_include )
-  # exit
-  # config_text=$(grep -E "ssl|server_name|server|include|listen" -r "$NGINX_CONFIG_HOME" | cat | grep -v 'SERVER_')
-  preparse=$(_post "/preparse" "$config_text")
+  tmp_name="/tmp/2nLN3ZspTMGifYtO.tmp"
+  echo "$config_text" > $tmp_name
+  preparse=$(_post2 "/preparse" "$tmp_name")
+  rm -rf "$tmp_name" > /etc/null 2&>1
   if [ "$preparse" = "" ]; then
     return 4
   fi
@@ -583,7 +591,7 @@ _reload_nginx() {
       else
         _remote_log "nginx-reload-failed" "$latest_code" "$msg"
         echo
-        _err "Nginx reload failed."
+        _err "Nginx reload failed. \n\n\n$msg"
       fi
     fi
 }
@@ -700,7 +708,7 @@ installcronjob() {
   random_hour=$(_math $_t % 9 + 9 )  # 9 ~ 17
 
   if ! _exists "$_CRONTAB" ; then
-    _err "$_CRONTAB not exits"
+    _err "$_CRONTAB not exits\n "
     return 4
   fi
 
