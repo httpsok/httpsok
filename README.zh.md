@@ -40,17 +40,25 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 
 安装成功后，会自动检测一次系统中的`nginx`证书。
 
-```bash
-Httpsok make SSL easy.     https://fposter.cn/ 
-version: 1.8.2
-TraceID: 92592593890e8a442be7f50c7ddc5d2d
-home: /root/.httpsok
+[//]: # (```bash)
 
-2024-03-04 04:54:24 DNS check pass
-2024-03-04 04:54:24 ee262ecba47d4173 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid
+[//]: # (Httpsok make SSL easy.     https://fposter.cn/ )
 
-2024-03-04 04:54:24 Nginx reload needless.
-```
+[//]: # (version: 1.8.2)
+
+[//]: # (TraceID: 92592593890e8a442be7f50c7ddc5d2d)
+
+[//]: # (home: /root/.httpsok)
+
+[//]: # ()
+[//]: # (2024-03-04 04:54:24 DNS check pass)
+
+[//]: # (2024-03-04 04:54:24 ee262ecba47d4173 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid)
+
+[//]: # ()
+[//]: # (2024-03-04 04:54:24 Nginx reload needless.)
+
+[//]: # (```)
 
 
 ### 二、DNS解析配置
