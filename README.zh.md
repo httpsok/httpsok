@@ -57,7 +57,7 @@ home: /root/.httpsok
 
 **根据脚本运行的实际情况**，添对应的的DNS解析记录。[DNS解析配置参考](https://fposter.cn/doc/guide/dns.html)
 
-![image-20240314024435126](assets/image-20240314024435126.png)
+![image-20240314024435126](./assets/image-20240314024435126.png)
 
 
 [//]: # ()
