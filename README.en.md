@@ -61,10 +61,13 @@ Add a DNS resolution record of type **CNAME**, and it only needs to be added onc
 **Solution:** Refer to [DNS Resolution](https://fposter.cn/doc/guide/dns.html)
 
 ```bash
-DNS-CNAME resolution invalid. Reference: https://fposter.cn/doc/guide/dns.html?code=1361fd24380436d44ea
-Please add the following DNS-CNAME resolution record (only needs to be configured once):
-
-_acme-challenge.******.cn >> 043a438043a438d40c.httpsok.com
++-------------------+-----------------------+------------+------------------------------------+
+|  域名             |  主机记录             |  记录类型  |  记录值                            |
++-------------------+-----------------------+------------+------------------------------------+
+|  *.baidu.com      |  _acme-challenge      |  CNAME     |  60d2f4fe0275d790.httpsok.com      |
++-------------------+-----------------------+------------+------------------------------------+
+|  *.sub.baidu.com  |  _acme-challenge.sub  |  CNAME     |  60d2f4fe0275d790.sub.httpsok.com  |
++-------------------+-----------------------+------------+------------------------------------+
 ```
 
 ## Issue Feedback
