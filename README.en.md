@@ -30,7 +30,7 @@
 
 ## Install httpsok
 
-Login to the console 👉 👉 👉 **[Get the full installation script](https://fposter.cn/console/?p=4c9n)**
+Login to the console 👉 👉 👉 **[Get the full installation script](https://fposter.cn/?p=4c9n)**
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'

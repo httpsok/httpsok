@@ -32,7 +32,7 @@
 
 ### 一、安装httpsok
 
-登陆控制台 👉 👉 👉 **[获取完整安装脚本](https://fposter.cn/console/?p=4c9n)**
+登陆控制台 👉 👉 👉 **[获取完整安装脚本](https://fposter.cn/?p=4c9n)**
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
