@@ -30,7 +30,9 @@
 
 ## Install httpsok
 
-Login to the console 👉 👉 👉 **[Get the full installation script](https://fposter.cn/?p=4c9n)**
+👉 👉 👉 **[Get the full installation script](https://fposter.cn/?p=4c9n)**
+
+<img  src="https://fposter.cn/dassets/image-20240321174206431.png" style="width=300px;" width=300  />
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
@@ -39,25 +41,6 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 ## Installation Success
 
 After successful installation, it will automatically check the `nginx` certificates in the system.
-
-[//]: # (```bash)
-
-[//]: # (Httpsok make SSL easy.     https://fposter.cn/ )
-
-[//]: # (version: 1.8.2)
-
-[//]: # (TraceID: 92592593890e8a442be7f50c7ddc5d2d)
-
-[//]: # (home: /root/.httpsok)
-
-[//]: # ()
-[//]: # (2024-03-04 04:54:24 DNS check pass)
-
-[//]: # (2024-03-04 04:54:24 ee262ecba47d4173 /etc/nginx/certs/fposter.cn_nginx/fposter.cn_bundle.crt Cert valid)
-
-[//]: # ()
-[//]: # (2024-03-04 04:54:24 Nginx reload needless.)
-```
 
 ## DNS Configuration
 
@@ -68,24 +51,6 @@ Add a DNS resolution record of type **CNAME**, and it only needs to be added onc
 **Solution:** Refer to [DNS Resolution](https://fposter.cn/doc/guide/dns.html)
 
 ![httsok的DNS解析配置示例](https://fposter.cn/dassets/image-20240314024435126.png)
-
-[//]: # (```bash)
-
-[//]: # (+-------------------+-----------------------+------------+--------------------------------+)
-
-[//]: # (|  域名             |  主机记录             |  记录类型  |  记录值                            |)
-
-[//]: # (+-------------------+-----------------------+------------+--------------------------------+)
-
-[//]: # (|  *.baidu.com      |  _acme-challenge      |  CNAME     |  f4fe0275d790.httpsok.com      |)
-
-[//]: # (+-------------------+-----------------------+------------+--------------------------------+)
-
-[//]: # (|  *.sub.baidu.com  |  _acme-challenge.sub  |  CNAME     |  f4fe0275d790.sub.httpsok.com  |)
-
-[//]: # (+-------------------+-----------------------+------------+--------------------------------+)
-
-[//]: # (```)
 
 ## Issue Feedback
 
