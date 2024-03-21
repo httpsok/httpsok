@@ -32,9 +32,9 @@
 
 ### 一、安装httpsok
 
-<img  src="https://fposter.cn/dassets/image-20240321174206431.png" style="width=300px;" width=300  />
-
 👉 👉 👉 **[获取完整安装脚本](https://fposter.cn/?p=4c9n)**
+
+<img  src="https://fposter.cn/dassets/image-20240321174206431.png" style="width=300px;" width=300  />
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
