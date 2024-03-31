@@ -6,7 +6,7 @@
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.8.2
+VER=1.9.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -128,9 +128,18 @@ _no_nginx_here(){
   echo
   _err "Can’t detected nginx\n"
   _err "Please confirm that nginx has been successfully installed on your system"
+  _detecte_is_root_run
   echo
   echo
   exit
+}
+
+_detecte_is_root_run(){
+  YELLOW='\033[1;33m'
+  NC='\033[0m' # No Color
+  if [ "$(id -u)" -ne 0 ]; then
+      echo -e "${YELLOW}Detected non-root user running, it's recommended to run as root user.${NC}\n"
+  fi
 }
 
 _initparams() {
@@ -163,7 +172,7 @@ _initparams() {
           # again to verify
           $nginx_bin -V > /dev/null 2>&1
           if [ $? -ne 0 ]; then
-            _no_nginx_here
+            _no_nginx_here 
           else
             echo "Nginx executable path: $nginx_bin"
           fi
@@ -211,7 +220,7 @@ _post2() {
   _inithttp
   url="${BASE_API_URL}$1"
   fiename="$2"
-  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "@$fiename" "$url"
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "@$fiename" "$url" 
 }
 
 _get() {
@@ -505,7 +514,7 @@ _preparse() {
   tmp_name="/tmp/2nLN3ZspTMGifYtO.tmp"
   echo "$config_text" > $tmp_name
   preparse=$(_post2 "/preparse" "$tmp_name")
-  rm -rf "$tmp_name" > /etc/null 2&>1
+  rm -rf "$tmp_name" > /dev/null 2&>1
   if [ "$preparse" = "" ]; then
     return 4
   fi
@@ -577,23 +586,37 @@ _reload_nginx() {
       return 0
     fi
 
-    msg=$($nginx_bin -t 2>&1)
-    if [ $? != 0 ]; then
-      _remote_log "nginx-test-failed" "$latest_code" "$msg"
-      echo
-      _err "Nginx test failed."
-    else
-      msg=$($nginx_bin -s reload 2>&1)
-      if [ "$msg" = "" ]; then
-        _remote_log "nginx-reload-success" "$latest_code" "Nginx reload success."
+    (
+      # fixbug: signal process started
+      cd $NGINX_CONFIG_HOME
+
+      msg=$($nginx_bin -t 2>&1)
+      if [ $? != 0 ]; then
+        _remote_log "nginx-test-failed" "$latest_code" "$msg"
         echo
-        _suc "Nginx reload success."
+        _err "Nginx test failed."
       else
-        _remote_log "nginx-reload-failed" "$latest_code" "$msg"
-        echo
-        _err "Nginx reload failed. \n\n\n$msg"
+        msg=$($nginx_bin -s reload 2>&1)
+        if [ "$msg" = "" ]; then
+          _remote_log "nginx-reload-success" "$latest_code" "Nginx reload success."
+          echo
+          _suc "Nginx reload success."
+        else
+
+          # Check if nginx is running
+          show_msg=$msg
+          pid=$(ps -e | grep nginx | grep -v 'grep' | head -n 1 | awk '{print $1}')
+          if [ -z "$pid" ]; then
+            msg="Nginx is not started. \n\n$msg"
+            show_msg="\033[33mNginx is not started. You can run \"service nginx start\" to start the Nginx. \033[31m\n\n$show_msg"
+          fi
+
+          _remote_log "nginx-reload-failed" "$latest_code" "$msg"
+          echo
+          _err "Nginx reload failed. \n\n$show_msg"
+        fi
       fi
-    fi
+    )
 }
 
 version() {
