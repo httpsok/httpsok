@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# WIKI: https://fposter.cn/doc
+# WIKI: https://httpsok.com/doc
 # This script only supports bash, do not support posix sh.
 # If you have the problem like Syntax error: "(" unexpected (expecting "fi"),
 # Try to run "bash -version" to check the version.
@@ -18,9 +18,9 @@ PROJECT_TOKEN_FILE="$PROJECT_HOME/token"
 PROJECT_LOG_FILE="$PROJECT_HOME/$PROJECT_NAME.log"
 HTTPSOK_TOKEN=""
 
-HTTPSOK_HOME_URL="https://fposter.cn/"
-BASE_API_URL="https://fposter.cn/v1/nginx"
-SCRIPT_URL="https://fposter.cn/httpsok.sh"
+HTTPSOK_HOME_URL="https://httpsok.com/"
+BASE_API_URL="https://httpsok.com/v1/nginx"
+SCRIPT_URL="https://get.httpsok.com/"
 
 latest_code=""
 preparse=""
@@ -823,7 +823,7 @@ _run() {
   _check_token
   if ! _preparse ; then
     _err "No SSL certificate was detected.\n "
-    _info "Please refer to resolve the issue. https://fposter.cn/doc/reference/nginx-config.html "
+    _info "Please refer to resolve the issue. https://httpsok.com/doc/reference/nginx-config.html "
     echo ""
     return 4
   fi
