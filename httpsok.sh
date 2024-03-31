@@ -194,6 +194,7 @@ _initparams() {
   _info "version: $NGINX_VERSION"
   _info "nginx-config: $NGINX_CONFIG"
   _info "nginx-config-home: $NGINX_CONFIG_HOME"
+  _info "nginx-bin: $nginx_bin"
   showWelcome
 }
 
@@ -249,6 +250,11 @@ _remote_log() {
   code="$2"
   msg="$3"
   _put "/log/$type?code=$code" "$msg"
+}
+
+_done() {
+  _t=$(_time)
+  _get "/done?t=$_t"
 }
 
 _create_file() {
@@ -359,16 +365,15 @@ _check_token() {
     _err "Invalid token: \033[1;36m$HTTPSOK_TOKEN\033[0m"
     _info "Please copy your token from '$HTTPSOK_HOME_URL'"
     echo
+    _err "$status"
     exit 4
   fi
   return 0
 }
 
-
 # Limit the maximum nesting level
 _include_max_calls=5
 _include_global_count=0
-
 
 __process_include() {
 
@@ -831,6 +836,7 @@ _run() {
   _check_dns
   _check_certs
   _reload_nginx
+  _done
   echo ""
 }
 
