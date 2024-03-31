@@ -32,7 +32,7 @@
 
 👉 👉 👉 **[Get the full installation script](https://fposter.cn/?p=4c9n)**
 
-<img  src="https://fposter.cn/dassets/image-20240321174206431.png" style="width=300px;" width=300  />
+[//]: # (<img  src="https://fposter.cn/dassets/image-20240321174206431.png" style="width=300px;" width=300  />)
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
@@ -51,6 +51,10 @@ Add a DNS resolution record of type **CNAME**, and it only needs to be added onc
 **Solution:** Refer to [DNS Resolution](https://fposter.cn/doc/guide/dns.html)
 
 ![httsok的DNS解析配置示例](https://fposter.cn/dassets/image-20240314024435126.png)
+
+## Well Done
+
+![控制台-证书管理](https://fposter.cn/dassets/image-20240331223307623.png)
 
 ## Issue Feedback
 

@@ -50,7 +50,10 @@ curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 
 ### 三、完成
 
-没错，已经结束，SSL证书自动续签就这么简单。
+没错，已经结束，SSL证书自动续签就这么简单。快登录控制台查看自己的证书吧。
+
+
+![控制台-证书管理](https://fposter.cn/dassets/image-20240331223307623.png)
 
 ## 问题反馈
 
