@@ -24,7 +24,7 @@
 - **✅ 自动检测** 无需关心nginx配置，自动识别证书配置，适合老旧系统、复杂配置的生产环境
 - **✅ 泛解析、多域名、多服务器** 轻松搞定
 - **✅ 证书监控** 对于即将失效的证书，提供公众号推送提醒
-- **✅ 兼容性好** 兼容主流的Linux系统也支持Docker环境运行
+- **✅ 兼容性好** 兼容主流的Linux系统 `Debain` `CentOS` `Ubuntu` `TencentOS` 等
 
 ## 快速开始
 
@@ -34,13 +34,13 @@
 
 👉 👉 👉 **[获取完整安装脚本](https://fposter.cn/?p=4c9n)**
 
-<img  src="https://fposter.cn/dassets/image-20240321174206431.png" style="width=300px;" width=300  />
+[//]: # (<img  src="https://fposter.cn/dassets/image-20240321174206431.png" style="width=300px;" width=300  />)
 
 ```bash
 curl -s https://fposter.cn/httpsok.sh | bash -s 'your token'
 ```
 
-安装成功后，会自动检测一次系统中的`nginx`证书。
+安装成功后，脚本会自动检测一次系统中的`nginx`证书。
 
 ### 二、DNS解析配置
 
