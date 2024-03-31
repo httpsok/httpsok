@@ -562,7 +562,7 @@ EOF
 
 _check_dns() {
   codes=$(echo "$preparse" | awk -F ',' '{print $1}' | tr '\n' ',' )
-  url="/checkDns?codes=$codes"
+  url="/checkDns"
   resp=$(_get "$url")
   status=$(echo "$resp" | head -n 1)
   case $status in
