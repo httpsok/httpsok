@@ -32,9 +32,7 @@
 
 ### 一、安装httpsok
 
-👉 👉 👉 **[获取完整安装脚本](https://httpsok.com/?p=4c9n)**
-
-[//]: # (<img  src="https://httpsok.com/dassets/image-20240321174206431.png" style="width=300px;" width=300  />)
+登陆控制台 👉 👉 👉 **[获取token](https://httpsok.com/?p=4c9n)**
 
 ```bash
 curl -s https://get.httpsok.com | bash -s 'your token'
