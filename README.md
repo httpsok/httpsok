@@ -5,7 +5,7 @@
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
   <img style="max-width: 100px; max-height: 30px;" alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img style="max-width: 100px; max-height: 30px;"alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.9.0-brightgreen">
+  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.9.2-brightgreen">
 </p>
 
 ## 介绍
@@ -25,6 +25,7 @@
 - **✅ 泛解析、多域名、多服务器** 轻松搞定
 - **✅ 证书监控** 对于即将失效的证书，提供公众号推送提醒
 - **✅ 兼容性好** 兼容主流的Linux系统 `Debain` `CentOS` `Ubuntu` `TencentOS` 等
+- **✅ 支持手动申请** 支持手动申请证书，所见即所得。
 
 ## 快速开始
 
@@ -51,7 +52,7 @@ curl -s https://get.httpsok.com | bash -s 'your token'
 没错，已经结束，SSL证书自动续签就这么简单。快登录控制台查看自己的证书吧。
 
 
-![控制台-证书管理](https://httpsok.com/dassets/image-20240331223307623.png)
+![控制台-证书管理](https://httpsok.com/dassets/image-20240412020032142.png)
 
 ## 问题反馈
 
