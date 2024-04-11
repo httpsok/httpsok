@@ -25,6 +25,7 @@
 - ✅ **Wildcard Resolutions, Multiple Domains, Multiple Servers**: Easily handle diverse scenarios.
 - ✅ **Certificate Monitoring**: Provides push notifications via public accounts for certificates approaching expiration.
 - ✅ **Good Compatibility**: Compatible with mainstream Linux systems such as `Debain` `CentOS` `Ubuntu` `TencentOS`.
+- ✅ **支持手动申请** 支持手动申请证书，方便部署CDN、OSS等场景。
 
 # Quick Start
 
