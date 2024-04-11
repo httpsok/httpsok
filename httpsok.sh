@@ -6,7 +6,7 @@
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.9.0
+VER=1.9.2
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -519,7 +519,7 @@ _preparse() {
   tmp_name="/tmp/2nLN3ZspTMGifYtO.tmp"
   echo "$config_text" > $tmp_name
   preparse=$(_post2 "/preparse" "$tmp_name")
-  rm -rf "$tmp_name" > /dev/null 2&>1
+  rm -rf "$tmp_name" > /dev/null 2>&1
   if [ "$preparse" = "" ]; then
     return 4
   fi
@@ -599,7 +599,7 @@ _reload_nginx() {
       if [ $? != 0 ]; then
         _remote_log "nginx-test-failed" "$latest_code" "$msg"
         echo
-        _err "Nginx test failed."
+        _err "Nginx test failed. \n\n$msg"
       else
         msg=$($nginx_bin -s reload 2>&1)
         if [ "$msg" = "" ]; then
@@ -832,6 +832,8 @@ _run() {
     echo ""
     return 4
   fi
+  _info "Checking SSL certificate, please wait a moment."
+  echo 
   _upload_certs
   _check_dns
   _check_certs
