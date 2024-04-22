@@ -5,7 +5,7 @@
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
   <img style="max-width: 100px; max-height: 30px;" alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img style="max-width: 100px; max-height: 30px;"alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.9.2-brightgreen">
+  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.10.0-brightgreen">
 </p>
 
 ## 介绍
@@ -39,7 +39,7 @@
 curl -s https://get.httpsok.com | bash -s 'your token'
 ```
 
-安装成功后，脚本会自动检测一次系统中的`nginx`证书。
+安装成功后，脚本会自动检测一次系统中的`nginx`证书，并同步到控制台。
 
 ### 二、DNS解析配置
 
@@ -49,7 +49,7 @@ curl -s https://get.httpsok.com | bash -s 'your token'
 
 ### 三、完成
 
-没错，已经结束，SSL证书自动续签就这么简单。快登录控制台查看自己的证书吧。
+没错，已经结束，SSL证书自动续签就这么简单。快登录 **[控制台](https://httpsok.com/?p=4c9n)** 查看自己的证书吧。
 
 
 ![控制台-证书管理](https://httpsok.com/dassets/image-20240412020032142.png)
