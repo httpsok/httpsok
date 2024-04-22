@@ -53,7 +53,7 @@ Add a DNS resolution record of type **CNAME**, and it only needs to be added onc
 
 ## Well Done
 
-![控制台-证书管理](https://httpsok.com/dassets/image-20240412020032142.png)
+![控制台-证书管理](https://httpsok.com/dassets/image-20240422160902921.png)
 
 ## Issue Feedback
 

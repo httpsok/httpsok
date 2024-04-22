@@ -52,7 +52,7 @@ curl -s https://get.httpsok.com | bash -s 'your token'
 没错，已经结束，SSL证书自动续签就这么简单。快登录 **[控制台](https://httpsok.com/?p=4c9n)** 查看自己的证书吧。
 
 
-![控制台-证书管理](https://httpsok.com/dassets/image-20240412020032142.png)
+![控制台-证书管理](https://httpsok.com/dassets/image-20240422160902921.png)
 
 ## 问题反馈
 
