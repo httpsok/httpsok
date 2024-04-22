@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# WIKI: https://httpsok.com/doc
+# WIKI: https://httpsok.com/doc/
 # This script only supports bash, do not support posix sh.
 # If you have the problem like Syntax error: "(" unexpected (expecting "fi"),
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.9.2
+VER=1.10.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
 
 PROJECT_HOME="$HOME/.httpsok"
+PROJECT_BACKUPS="$HOME/.httpsok/backups"
 PROJECT_ENTRY_BIN="$PROJECT_HOME/$PROJECT_ENTRY"
 
 PROJECT_TOKEN_FILE="$PROJECT_HOME/token"
@@ -19,7 +20,7 @@ PROJECT_LOG_FILE="$PROJECT_HOME/$PROJECT_NAME.log"
 HTTPSOK_TOKEN=""
 
 HTTPSOK_HOME_URL="https://httpsok.com/"
-BASE_API_URL="https://httpsok.com/v1/nginx"
+BASE_API_URL="https://api.httpsok.com/v1/nginx"
 SCRIPT_URL="https://get.httpsok.com/"
 
 latest_code=""
@@ -122,6 +123,7 @@ _mkdirs() {
 
 _initpath() {
   _mkdirs "$PROJECT_HOME"
+  _mkdirs "$PROJECT_BACKUPS"
 }
 
 _no_nginx_here(){
@@ -172,7 +174,7 @@ _initparams() {
           # again to verify
           $nginx_bin -V > /dev/null 2>&1
           if [ $? -ne 0 ]; then
-            _no_nginx_here 
+            _no_nginx_here
           else
             echo "Nginx executable path: $nginx_bin"
           fi
@@ -221,7 +223,7 @@ _post2() {
   _inithttp
   url="${BASE_API_URL}$1"
   fiename="$2"
-  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "@$fiename" "$url" 
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "@$fiename" "$url"
 }
 
 _get() {
@@ -258,12 +260,26 @@ _done() {
 }
 
 _create_file() {
-  local file_path="$1"
+  local _code="$1"
+  local file_path="$2"
   if [ ! -e "$file_path" ]; then
     dir_path=$(dirname "$file_path")
     mkdir -p "$dir_path"
     touch "$file_path"
-    _info "File created: $file_path"
+    _suc "$_code" "File created: $file_path"
+  else
+    # backup the files
+    if [ -f "$file_path" ]; then
+      _filename=${file_path##*/}
+      _date=$(date +"%Y%m%d%H%M%S")
+      backup_file_path="$PROJECT_BACKUPS/$_filename.$_date"
+      if [ -f "$backup_file_path" ]; then
+        _err "$_code" "Backup file already exists: $backup_file_path"
+      else
+        mv "$file_path" "$backup_file_path"
+        _suc "$_code" "Backup the file $file_path to $backup_file_path"
+      fi
+    fi
   fi
 }
 
@@ -281,7 +297,7 @@ _check() {
     status=$(echo "$resp" | head -n 1)
     case $status in
       "1")
-        _suc "$code $cert_file The new certificate has been updated"
+#        _info "$code $cert_file The new certificate has been updated"
         md5_line=$(echo "$resp" | awk 'NR==2')
 
         cert_file_md5=$(echo $md5_line | awk -F ',' '{print $1}')
@@ -297,7 +313,7 @@ _check() {
         tmp_cert_key_md5=$(md5sum "$tmp_cert_key_file" | awk '{print $1}')
         if [ "$cert_file_md5" = "$tmp_cert_md5" ] && [ "$cert_key_file_md5" = "$tmp_cert_key_md5" ]; then
           # if local_cert_file not here. need to create the file
-          _create_file "$cert_file" && _create_file "$cert_key_file"
+          _create_file "$code" "$cert_file" && _create_file "$code" "$cert_key_file"
           mv "$tmp_cert_file" "$cert_file" && mv "$tmp_cert_key_file" "$cert_key_file"
           _suc "$code $cert_file New cert updated"
           _remote_log "cert-updated-success" "$code" "New cert updated"
@@ -313,7 +329,7 @@ _check() {
         _check $((depth - 1)) "$code" "$cert_file" "$cert_key_file"
         ;;
       "3")
-        _suc "$code $cert_file Cert valid"
+        _info "$code $cert_file Cert valid"
         ;;
       "12")
         _err "$code $cert_file DNS CNAME invalid"
