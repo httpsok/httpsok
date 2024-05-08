@@ -6,7 +6,12 @@
 # Try to run "bash -version" to check the version.
 # Try to visit WIKI to find a solution.
 
-VER=1.10.0
+################################################
+# NGINX_CONFIG=/etc/nginx/nginx.conf
+# NGINX_CONFIG_HOME=/etc/nginx
+##################################################
+
+VER=1.11.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -27,8 +32,6 @@ latest_code=""
 preparse=""
 OS=""
 NGINX_VERSION=""
-NGINX_CONFIG=""
-NGINX_CONFIG_HOME=""
 TRACE_ID=""
 MODE="normal"
 
@@ -185,18 +188,46 @@ _initparams() {
 
   NGINX_VERSION=$($nginx_bin -v 2>&1 | awk -F ': ' '{print $2}' | head -c 20)
 
-  # Use a running nginx first
-  NGINX_CONFIG=$(ps -eo pid,cmd | grep nginx | grep master | grep '\-c' | awk -F '-c' '{print $2}' | sed 's/ //g')
+
+  # user can setting
   if [ -z "$NGINX_CONFIG" ]; then
+    # Use a running nginx first
+    NGINX_CONFIG=$(ps -eo pid,cmd | grep nginx | grep master | grep '\-c' | awk -F '-c' '{print $2}' | sed 's/ //g')
+  fi
+
+  # fix the NGINX_CONFIG equals nginx.conf bug
+  if [ -z "$NGINX_CONFIG"  ] || [ "$NGINX_CONFIG" = "nginx.conf" ]; then
     NGINX_CONFIG=$($nginx_bin -t 2>&1 | grep 'configuration' | head -n 1 | awk -F 'file' '{print $2}' | awk '{print $1}' )
   fi
-  NGINX_CONFIG_HOME=$(dirname "$NGINX_CONFIG")
+
+  if [ -z "$NGINX_CONFIG_HOME" ]; then
+    NGINX_CONFIG_HOME=$(dirname "$NGINX_CONFIG")
+  fi;
+
 
   _info "os-name: $OS"
   _info "version: $NGINX_VERSION"
   _info "nginx-config: $NGINX_CONFIG"
   _info "nginx-config-home: $NGINX_CONFIG_HOME"
   _info "nginx-bin: $nginx_bin"
+
+
+  if [ "$NGINX_CONFIG_HOME" = "." ]; then
+    echo ""
+    echo ""
+    echo -e "\033[31m获取nginx配置文件失败, 请您根据实际情况，手动设置\033[0m"
+    echo ""
+    echo -e "\033[1;36m修改文件 $PROJECT_ENTRY_BIN\033[0m"
+    echo ""
+    echo "################################################"
+    echo "# 配置示例 "
+    echo "NGINX_CONFIG=/etc/nginx/nginx.conf"
+    echo "NGINX_CONFIG_HOME=/etc/nginx"
+    echo "##################################################"
+    echo ""
+    exit 0
+  fi
+
   showWelcome
 }
 
