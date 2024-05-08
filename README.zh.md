@@ -5,7 +5,7 @@
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
   <img style="max-width: 100px; max-height: 30px;" alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img style="max-width: 100px; max-height: 30px;"alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.10.0-brightgreen">
+  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.11.0-brightgreen">
 </p>
 
 ## 介绍
@@ -24,8 +24,10 @@
 - **✅ 自动检测** 无需关心nginx配置，自动识别证书配置，适合老旧系统、复杂配置的生产环境
 - **✅ 泛解析、多域名、多服务器** 轻松搞定
 - **✅ 证书监控** 对于即将失效的证书，提供公众号推送提醒
-- **✅ 兼容性好** 兼容主流的Linux系统 `Debain` `CentOS` `Ubuntu` `TencentOS` 等
-- **✅ 支持手动申请** 支持手动申请证书，方便部署CDN、OSS等场景。
+- **✅ 兼容性好** 兼容主流Linux系统 `Debain` `CentOS` `Ubuntu` `TencentOS` 和 `docker容器`环境
+- **✅ 支持手动申请** 支持手动申请证书
+- **✅ CDN、OSS轻松搞定** 支持主流的厂商的CDN和OSS自动部署
+
 
 ## 快速开始
 
