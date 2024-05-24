@@ -11,7 +11,7 @@
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.11.0
+VER=1.12.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -21,8 +21,10 @@ PROJECT_BACKUPS="$HOME/.httpsok/backups"
 PROJECT_ENTRY_BIN="$PROJECT_HOME/$PROJECT_ENTRY"
 
 PROJECT_TOKEN_FILE="$PROJECT_HOME/token"
+HTTPSOK_UUID_FILE="$PROJECT_HOME/uuid"
 PROJECT_LOG_FILE="$PROJECT_HOME/$PROJECT_NAME.log"
 HTTPSOK_TOKEN=""
+HTTPSOK_UUID=""
 
 HTTPSOK_HOME_URL="https://httpsok.com/"
 BASE_API_URL="https://api.httpsok.com/v1/nginx"
@@ -32,8 +34,8 @@ latest_code=""
 preparse=""
 OS=""
 NGINX_VERSION=""
-TRACE_ID=""
 MODE="normal"
+
 
 _upper_case() {
   tr '[a-z]' '[A-Z]'
@@ -154,8 +156,6 @@ _initparams() {
   fi
 
   if [ -f /etc/os-release ]; then
-#      source /etc/os-release
-#      OS=$PRETTY_NAME
       OS=$(grep 'PRETTY_NAME' /etc/os-release | awk -F '=' '{print $2}' | tr -d '"')
   elif [ -f /etc/redhat-release ]; then
       OS=$(cat /etc/redhat-release)
@@ -188,7 +188,6 @@ _initparams() {
 
   NGINX_VERSION=$($nginx_bin -v 2>&1 | awk -F ': ' '{print $2}' | head -c 20)
 
-
   # user can setting
   if [ -z "$NGINX_CONFIG" ]; then
     # Use a running nginx first
@@ -202,15 +201,17 @@ _initparams() {
 
   if [ -z "$NGINX_CONFIG_HOME" ]; then
     NGINX_CONFIG_HOME=$(dirname "$NGINX_CONFIG")
-  fi;
+  fi
 
-
+  _init_httpsok_params
+  
   _info "os-name: $OS"
   _info "version: $NGINX_VERSION"
   _info "nginx-config: $NGINX_CONFIG"
   _info "nginx-config-home: $NGINX_CONFIG_HOME"
   _info "nginx-bin: $nginx_bin"
-
+  _info "httpsok-uuid: $HTTPSOK_UUID"
+  
 
   if [ "$NGINX_CONFIG_HOME" = "." ]; then
     echo ""
@@ -231,7 +232,43 @@ _initparams() {
   showWelcome
 }
 
+_init_httpsok_params() {
+
+  if [ "$HTTPSOK_UUID" != "" ]; then
+    return 0
+  fi
+
+  if [ -f "$HTTPSOK_UUID_FILE" ]; then
+    HTTPSOK_UUID=$(cat "$HTTPSOK_UUID_FILE")
+  fi
+
+  if [ "$HTTPSOK_UUID" != "" ]; then
+    # _info "load HTTPSOK_UUID from $HTTPSOK_UUID_FILE: $HTTPSOK_UUID"
+    return 0
+  fi
+
+  _initpath
+
+  if [ -f "/sys/class/dmi/id/product_uuid" ]; then
+    HTTPSOK_UUID=$(cat /sys/class/dmi/id/product_uuid)
+    if [ "$HTTPSOK_UUID" != "" ]; then
+      echo "$HTTPSOK_UUID" > "$HTTPSOK_UUID_FILE"
+      # _info "save HTTPSOK_UUID from product_uuid to $HTTPSOK_UUID_FILE: $HTTPSOK_UUID"
+      return 0
+    fi
+  fi
+
+  HTTPSOK_UUID=$(_random_md5)
+  echo "$HTTPSOK_UUID" > "$HTTPSOK_UUID_FILE"
+  # _info "save HTTPSOK_UUID to $HTTPSOK_UUID_FILE: $HTTPSOK_UUID"
+
+}
+
+
 _inithttp() {
+
+  _init_httpsok_params
+
   _H0="Content-Type: text/plain"
   _H1="httpsok-token: $HTTPSOK_TOKEN"
   _H2="httpsok-version: $VER"
@@ -241,26 +278,27 @@ _inithttp() {
   _H6="nginx-config: $NGINX_CONFIG"
   _H7="trace-id: $TRACE_ID"
   _H8="mode: $MODE"
+  _H9="httpsok-uuid: $HTTPSOK_UUID"
 }
 
 _post() {
   _inithttp
   url="${BASE_API_URL}$1"
   body="$2"
-  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "$body" "$url"
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -H "$_H9" --data-binary "$body" "$url"
 }
 
 _post2() {
   _inithttp
   url="${BASE_API_URL}$1"
   fiename="$2"
-  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "@$fiename" "$url"
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -H "$_H9" --data-binary "@$fiename" "$url" 
 }
 
 _get() {
   _inithttp
   url="${BASE_API_URL}$1"
-  curl -s -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" "$url"
+  curl -s -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -H "$_H9" "$url"
 }
 
 _upload() {
@@ -268,14 +306,14 @@ _upload() {
   url="${BASE_API_URL}/upload?code=$1"
   _F1="cert=@\"$2\""
   _F2="certKey=@\"$3\""
-  curl -s -X POST -H "Content-Type: multipart/form-data" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -F $_F1 -F $_F2 "$url" 2>&1
+  curl -s -X POST -H "Content-Type: multipart/form-data" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -H "$_H9" -F $_F1 -F $_F2 "$url" 2>&1
 }
 
 _put() {
   _inithttp
   url="${BASE_API_URL}$1"
   body="$2"
-  curl -s -X PUT -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" --data-binary "$body" "$url"
+  curl -s -X PUT -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -H "$_H9" --data-binary "$body" "$url"
 }
 
 _remote_log() {
@@ -419,7 +457,7 @@ _check_token() {
 }
 
 # Limit the maximum nesting level
-_include_max_calls=5
+_include_max_calls=20
 _include_global_count=0
 
 __process_include() {
