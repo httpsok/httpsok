@@ -1,4 +1,4 @@
-<p align="center"><a href="https://httpsok.com/doc/" target="_blank"><img width="168" src="https://httpsok.com/dassets/httpsok-logo.png" alt="httpsok logo"></a></p>
+<p align="center"><a href="https://httpsok.com/doc/" target="_blank"><img width="168" src="https://cdn.httpsok.com/doc/assets/httpsok-logo.png" alt="httpsok logo"></a></p>
 
 <p align="center">
   <a href="https://github.com/httpsok/httpsok" class="link github-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/httpsok/httpsok?style=social"></a>
@@ -47,14 +47,15 @@ curl -s https://get.httpsok.com | bash -s 'your token'
 
 **根据脚本运行的实际情况**，添对应的的DNS解析记录。[DNS解析配置参考](https://httpsok.com/doc/guide/dns.html)
 
-![httsok的DNS解析配置示例](https://httpsok.com/dassets/image-20240314024435126.png)
+![httsok-DNS解析配置示例](https://cdn.httpsok.com/doc/assets/guide/image-20240314024435126.png)
 
 ### 三、完成
 
 没错，已经结束，SSL证书自动续签就这么简单。快登录 **[控制台](https://httpsok.com/?p=4c9n)** 查看自己的证书吧。
 
 
-![控制台-证书管理](https://httpsok.com/dassets/image-20240422160902921.png)
+![httsok控制台-证书管理](https://cdn.httpsok.com/doc/assets/guide/image-20240528012201352.png)
+
 
 ## 问题反馈
 
@@ -62,4 +63,4 @@ curl -s https://get.httpsok.com | bash -s 'your token'
 
 作者微信 请备注 `httpsok`
 
-<img width="168" src="https://httpsok.com/dassets/qrcode.png" alt="httpsok logo">
+<img width="168" src="https://cdn.httpsok.com/doc/assets/qrcode.png" alt="httpsok logo">
