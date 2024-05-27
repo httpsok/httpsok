@@ -26,6 +26,7 @@
 - ✅ **Certificate Monitoring**: Provides push notifications via public accounts for certificates approaching expiration.
 - ✅ **Good Compatibility**: Compatible with mainstream Linux systems such as `Debain` `CentOS` `Ubuntu` `TencentOS`.
 - ✅ **支持手动申请** 支持手动申请证书，方便部署CDN、OSS等场景。
+- ✅ **CDN、LB、OSS轻松搞定** 支持主流云厂商
 
 # Quick Start
 
@@ -49,14 +50,14 @@ Add a DNS resolution record of type **CNAME**, and it only needs to be added onc
 
 **Solution:** Refer to [DNS Resolution](https://httpsok.com/doc/guide/dns.html)
 
-![httsok的DNS解析配置示例](https://httpsok.com/dassets/image-20240314024435126.png)
+![httsok-DNS解析配置示例](https://cdn.httpsok.com/doc/assets/guide/image-20240314024435126.png)
 
 ## Well Done
 
-![控制台-证书管理](https://httpsok.com/dassets/image-20240422160902921.png)
+![httsok控制台-证书管理](https://cdn.httpsok.com/doc/assets/guide/image-20240528012201352.png)
 
 ## Issue Feedback
 
 Author's WeChat: Please mention `httpsok`
 
-<img width="168" src="https://httpsok.com/dassets/qrcode.png" alt="httpsok logo">
+<img width="168" src="https://cdn.httpsok.com/doc/assets/qrcode.png" alt="httpsok logo">
