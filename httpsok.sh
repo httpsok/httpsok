@@ -11,7 +11,7 @@
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.12.0
+VER=1.13.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
