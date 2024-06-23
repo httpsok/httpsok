@@ -1,4 +1,4 @@
-<p align="center"><a href="https://httpsok.com/doc/" target="_blank"><img width="168" src="https://httpsok.com/dassets/httpsok-logo.png" alt="httpsok logo"></a></p>
+<p align="center"><a href="https://httpsok.com/doc/" target="_blank"><img width="168" src="https://cdn.httpsok.com/assets/httpsok-logo.png" alt="httpsok logo"></a></p>
 
 <p align="center">
   <a href="https://github.com/httpsok/httpsok" class="link github-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/httpsok/httpsok?style=social"></a>
