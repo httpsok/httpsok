@@ -11,7 +11,7 @@
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.13.0
+VER=1.14.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -204,14 +204,14 @@ _initparams() {
   fi
 
   _init_httpsok_params
-  
+
   _info "os-name: $OS"
   _info "version: $NGINX_VERSION"
   _info "nginx-config: $NGINX_CONFIG"
   _info "nginx-config-home: $NGINX_CONFIG_HOME"
   _info "nginx-bin: $nginx_bin"
   _info "httpsok-uuid: $HTTPSOK_UUID"
-  
+
 
   if [ "$NGINX_CONFIG_HOME" = "." ]; then
     echo ""
@@ -292,7 +292,7 @@ _post2() {
   _inithttp
   url="${BASE_API_URL}$1"
   fiename="$2"
-  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -H "$_H9" --data-binary "@$fiename" "$url" 
+  curl -s -X POST -H "$_H0" -H "$_H1" -H "$_H2" -H "$_H3" -H "$_H4" -H "$_H5" -H "$_H6" -H "$_H7" -H "$_H8" -H "$_H9" --data-binary "@$fiename" "$url"
 }
 
 _get() {
@@ -326,6 +326,12 @@ _remote_log() {
 _done() {
   _t=$(_time)
   _get "/done?t=$_t"
+}
+
+_remote_uninstall(){
+  _load_token
+  _t=$(_time)
+  _get "/uninstall?t=$_t"
 }
 
 _create_file() {
@@ -865,6 +871,7 @@ installAlais() {
 
 _uninstall() {
   _info "Uninstalling httpsok."
+  _remote_uninstall
   uninstallcronjob
   _uninstallalias
   if [ -d "$PROJECT_HOME" ]; then
