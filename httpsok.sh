@@ -7,11 +7,12 @@
 # Try to visit WIKI to find a solution.
 
 ################################################
+NGINX_BIN=nginx
 # NGINX_CONFIG=/etc/nginx/nginx.conf
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.14.0
+VER=1.15.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -166,27 +167,27 @@ _initparams() {
       exit 1
   fi
 
-  nginx_bin=nginx
-  $nginx_bin -V > /dev/null 2>&1
+#  NGINX_BIN=nginx
+  $NGINX_BIN -V > /dev/null 2>&1
   if [ $? -ne 0 ]; then
       echo "no nginx in PATH, find the nginx"
       pid=$(ps -e | grep nginx | grep -v 'grep' | head -n 1 | awk '{print $1}')
       if [ -n "$pid" ]; then
-          nginx_bin=$(readlink -f /proc/"$pid"/exe)
-          # echo "nginx_bin=$nginx_bin"
+          NGINX_BIN=$(readlink -f /proc/"$pid"/exe)
+          # echo "NGINX_BIN=$NGINX_BIN"
           # again to verify
-          $nginx_bin -V > /dev/null 2>&1
+          $NGINX_BIN -V > /dev/null 2>&1
           if [ $? -ne 0 ]; then
             _no_nginx_here
           else
-            echo "Nginx executable path: $nginx_bin"
+            echo "Nginx executable path: $NGINX_BIN"
           fi
       else
         _no_nginx_here
       fi
   fi
 
-  NGINX_VERSION=$($nginx_bin -v 2>&1 | awk -F ': ' '{print $2}' | head -c 20)
+  NGINX_VERSION=$($NGINX_BIN -v 2>&1 | awk -F ': ' '{print $2}' | head -c 20)
 
   # user can setting
   if [ -z "$NGINX_CONFIG" ]; then
@@ -196,7 +197,7 @@ _initparams() {
 
   # fix the NGINX_CONFIG equals nginx.conf bug
   if [ -z "$NGINX_CONFIG"  ] || [ "$NGINX_CONFIG" = "nginx.conf" ]; then
-    NGINX_CONFIG=$($nginx_bin -t 2>&1 | grep 'configuration' | head -n 1 | awk -F 'file' '{print $2}' | awk '{print $1}' )
+    NGINX_CONFIG=$($NGINX_BIN -t 2>&1 | grep 'configuration' | head -n 1 | awk -F 'file' '{print $2}' | awk '{print $1}' )
   fi
 
   if [ -z "$NGINX_CONFIG_HOME" ]; then
@@ -209,7 +210,7 @@ _initparams() {
   _info "version: $NGINX_VERSION"
   _info "nginx-config: $NGINX_CONFIG"
   _info "nginx-config-home: $NGINX_CONFIG_HOME"
-  _info "nginx-bin: $nginx_bin"
+  _info "nginx-bin: $NGINX_BIN"
   _info "httpsok-uuid: $HTTPSOK_UUID"
 
 
@@ -686,14 +687,14 @@ _reload_nginx() {
       # fixbug: signal process started
       cd $NGINX_CONFIG_HOME
 
-      msg=$($nginx_bin -t 2>&1)
+      msg=$($NGINX_BIN -t 2>&1)
       if [ $? != 0 ]; then
         _remote_log "nginx-test-failed" "$latest_code" "$msg"
         echo
         _err "Nginx test failed. \n\n$msg"
       else
-        msg=$($nginx_bin -s reload 2>&1)
-        if [ "$msg" = "" ]; then
+        msg=$($NGINX_BIN -s reload 2>&1)
+        if [ $? -eq 0 ]; then
           _remote_log "nginx-reload-success" "$latest_code" "Nginx reload success."
           echo
           _suc "Nginx reload success."
