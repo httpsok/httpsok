@@ -12,7 +12,7 @@ NGINX_BIN=nginx
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.15.0
+VER=1.16.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -828,7 +828,7 @@ installcronjob() {
   random_hour=$(_math $_t % 9 + 9 )  # 9 ~ 17
 
   if ! _exists "$_CRONTAB" ; then
-    _err "$_CRONTAB not exits\n "
+    _err "$_CRONTAB not exits\ncrontab定时任务不存在，请安装。参考文档：https://httpsok.com/doc/faq/crontab.html \n"
     return 4
   fi
 
