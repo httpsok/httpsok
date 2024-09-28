@@ -12,7 +12,7 @@ NGINX_BIN=nginx
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.16.0
+VER=1.17.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -114,7 +114,6 @@ showWelcome() {
   echo -e "\033[1;36mHttpsok make SSL easy.     $HTTPSOK_HOME_URL \033[0m"
   echo -e "\033[1;36mversion: $VER\033[0m"
   echo -e "\033[1;36mTraceID: $TRACE_ID\033[0m"
-  # echo "home: $PROJECT_HOME"
   echo
 }
 
@@ -136,13 +135,13 @@ _no_nginx_here(){
   echo
   _err "Can’t detected nginx\n"
   _err "Please confirm that nginx has been successfully installed on your system"
-  _detecte_is_root_run
+  _detected_is_root_run
   echo
   echo
   exit
 }
 
-_detecte_is_root_run(){
+_detected_is_root_run(){
   YELLOW='\033[1;33m'
   NC='\033[0m' # No Color
   if [ "$(id -u)" -ne 0 ]; then
@@ -150,7 +149,7 @@ _detecte_is_root_run(){
   fi
 }
 
-_initparams() {
+_init_params() {
 
   if [ "$OS" != "" ]; then
       return 0
@@ -596,16 +595,9 @@ __process_include() {
   fi
 }
 
-# __process_format(){
-#   cat /dev/stdin | awk -v NGINX_CONFIG="$NGINX_CONFIG:" '{
-#       # gsub("import", "include")
-#       # print NGINX_CONFIG $0
-#       print $0
-#   }'
-# }
 
 _preparse() {
-  _initparams
+  _init_params
 
   config_text=$(cat $NGINX_CONFIG | __process_include )
   tmp_name="/tmp/2nLN3ZspTMGifYtO.tmp"
@@ -650,7 +642,6 @@ _check_certs() {
     if [ -n "$_code" ]; then
       latest_code="$_code"
     fi
-#  done < <( echo "$preparse" )
   done <<EOF
   $preparse
 EOF
@@ -926,7 +917,7 @@ _run() {
     return 4
   fi
   _info "Checking SSL certificate, please wait a moment."
-  echo 
+  echo
   _upload_certs
   _check_dns
   _check_certs
@@ -939,7 +930,7 @@ _process() {
   while [ ${#} -gt 0 ]; do
     case "${1}" in
       --help | -h)
-        showhelp
+        show_help
         return
         ;;
       --version | -v)
@@ -984,7 +975,7 @@ _process() {
 }
 
 
-showhelp() {
+show_help() {
   echo "Usage: $PROJECT_ENTRY <command> ... [parameters ...]
 Commands:
   -h, --help               Show this help message.
@@ -1000,7 +991,7 @@ Commands:
 }
 
 main() {
-  [ -z "$1" ] && showhelp && return
+  [ -z "$1" ] && show_help && return
   if _startswith "$1" '-'; then _process "$@"; else _process --setup "$@"; fi
 }
 
