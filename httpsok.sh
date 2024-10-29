@@ -186,7 +186,7 @@ _init_params() {
       fi
   fi
 
-  NGINX_VERSION=$($NGINX_BIN -v 2>&1 | awk -F ': ' '{print $2}' | head -c 20)
+  NGINX_VERSION=$($NGINX_BIN -v 2>&1 | awk -F ': ' '{print $2}' | head -n 1 | head -c 20)
 
   # user can setting
   if [ -z "$NGINX_CONFIG" ]; then
@@ -390,8 +390,8 @@ _check() {
           # if local_cert_file not here. need to create the file
           _create_file "$code" "$cert_file" && _create_file "$code" "$cert_key_file"
           mv "$tmp_cert_file" "$cert_file" && mv "$tmp_cert_key_file" "$cert_key_file"
-          _suc "$code $cert_file New cert updated"
-          _remote_log "cert-updated-success" "$code" "New cert updated"
+          _suc "$code $cert_file New cert updated(证书更新成功)"
+          _remote_log "cert-updated-success" "$code" "New cert updated(证书更新成功)"
           echo "latest_code $code"
         else
           _err "$code $cert_file New cert update failed (md5 not match)"
@@ -399,18 +399,18 @@ _check() {
         fi
         ;;
       "2")
-        _info "$code $cert_file Processing, please just wait..."
+        _info "$code $cert_file Processing, please just wait(正在处理中，请稍等)..."
         sleep 10
         _check $((depth - 1)) "$code" "$cert_file" "$cert_key_file"
         ;;
       "3")
-        _info "$code $cert_file Cert valid"
+        _info "$code $cert_file Cert valid(证书有效)"
         ;;
       "12")
-        _err "$code $cert_file DNS CNAME invalid"
+        _err "$code $cert_file DNS CNAME invalid(DNS检测不通过)"
         ;;
       "13")
-        _err "$code $cert_file code invalid"
+        _err "$code $cert_file code invalid(非法请求)"
         ;;
       *)
         _err "$code $cert_file $resp"
@@ -449,6 +449,7 @@ _check_token() {
     _err "httpsok's token can not empty"
     exit 4
   fi
+  _init_params
   status=$(_get "/status")
   # _info "status >> $status"
   if [ "$status" != "ok" ]; then
@@ -655,7 +656,7 @@ _check_dns() {
   status=$(echo "$resp" | head -n 1)
   case $status in
     "3")
-      _suc "DNS check pass"
+      _suc "DNS check pass(DNS检查通过)"
       ;;
     "13")
       _err "code invalid"
@@ -670,7 +671,7 @@ _reload_nginx() {
 
     if [ "$latest_code" = "" ]; then
       echo
-      _info "Nginx reload needless."
+      _info "Nginx reload needless(无需重载)."
       return 0
     fi
 
@@ -682,26 +683,26 @@ _reload_nginx() {
       if [ $? != 0 ]; then
         _remote_log "nginx-test-failed" "$latest_code" "$msg"
         echo
-        _err "Nginx test failed. \n\n$msg"
+        _err "Nginx test failed(测试失败). \n\n$msg"
       else
         msg=$($NGINX_BIN -s reload 2>&1)
         if [ $? -eq 0 ]; then
-          _remote_log "nginx-reload-success" "$latest_code" "Nginx reload success."
+          _remote_log "nginx-reload-success" "$latest_code" "Nginx reload success(重载成功)."
           echo
-          _suc "Nginx reload success."
+          _suc "Nginx reload success(重载成功)."
         else
 
           # Check if nginx is running
           show_msg=$msg
           pid=$(ps -e | grep nginx | grep -v 'grep' | head -n 1 | awk '{print $1}')
           if [ -z "$pid" ]; then
-            msg="Nginx is not started. \n\n$msg"
-            show_msg="\033[33mNginx is not started. You can run \"service nginx start\" to start the Nginx. \033[31m\n\n$show_msg"
+            msg="Nginx is not started(服务未启动). \n\n$msg"
+            show_msg="\033[33mNginx is not started. You can run \"service nginx start\" to start the Nginx(请重启服务). \033[31m\n\n$show_msg"
           fi
 
           _remote_log "nginx-reload-failed" "$latest_code" "$msg"
           echo
-          _err "Nginx reload failed. \n\n$show_msg"
+          _err "Nginx reload failed(重载失败). \n\n$show_msg"
         fi
       fi
     )
@@ -911,12 +912,12 @@ _run() {
   _load_token
   _check_token
   if ! _preparse ; then
-    _err "No SSL certificate was detected.\n "
-    _info "Please refer to resolve the issue. https://httpsok.com/doc/reference/nginx-config.html "
+    _err "No SSL certificate was detected(未检测到SSL证书).\n "
+    _info "Please refer to resolve the issue(查看文档，解决此问题). https://httpsok.com/doc/faq/nossl.html "
     echo ""
     return 4
   fi
-  _info "Checking SSL certificate, please wait a moment."
+  _info "Checking SSL certificate, please wait a moment(证书检测中请稍等...)."
   echo
   _upload_certs
   _check_dns
