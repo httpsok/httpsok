@@ -5,7 +5,7 @@
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
   <img style="max-width: 100px; max-height: 30px;" alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
   <img style="max-width: 100px; max-height: 30px;"alt="license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.17.0-brightgreen">
+  <img style="max-width: 100px; max-height: 30px;"alt="version" src="https://img.shields.io/badge/version-1.18.0-brightgreen">
 </p>
 
 ## 介绍
@@ -35,11 +35,9 @@
 
 ### 一、安装httpsok
 
-登陆控制台 👉 👉 👉 **[获取token](https://httpsok.com/?p=4c9n)**
+登陆PC控制台 👉 👉 👉 **[获取安装命令](https://httpsok.com/p/4c9n)** ，然后到服务器执行即可。
 
-```bash
-curl -s https://get.httpsok.com | bash -s 'your******token'
-```
+![httsok.com 控制台-复制并执行安装命令](https://cdn.httpsok.com/doc/assets/guide/image-20241124012814210.png)
 
 安装成功后，脚本会自动检测一次系统中的`nginx`证书，并同步到控制台。
 

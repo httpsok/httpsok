@@ -12,7 +12,7 @@ NGINX_BIN=nginx
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.17.0
+VER=1.18.0
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
