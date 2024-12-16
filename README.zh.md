@@ -10,7 +10,7 @@
 
 ## 介绍
 
-**httpsok** 是一个便捷的 HTTPS 证书自动续签工具，专为 Nginx 、OpenResty 服务器设计。已服务众多中小企业，**稳定**、**安全**、**可靠**。
+**httpsok** 是一个便捷的 HTTPS 证书自动续期工具，基于全新的设计理念，专为 `Nginx` 、`OpenResty`、`Apache` 等服务器设计。已服务众多中小企业，**稳定**、**安全**、**可靠**。
 
 **一行命令，一分钟轻松搞定SSL证书自动续期**
 
@@ -39,6 +39,7 @@
 
 ![httsok.com 控制台-复制并执行安装命令](https://cdn.httpsok.com/doc/assets/guide/image-20241124012814210.png)
 
+
 安装成功后，脚本会自动检测一次系统中的`nginx`证书，并同步到控制台。
 
 ### 二、DNS解析配置
@@ -52,7 +53,7 @@
 没错，已经结束，SSL证书自动续签就这么简单。快登录 **[控制台](https://httpsok.com/?p=4c9n)** 查看自己的证书吧。
 
 
-![httsok控制台-证书管理](https://cdn.httpsok.com/doc/assets/guide/image-20240528012201352.png)
+![httsok控制台-证书管理](https://cdn.httpsok.com/doc/assets/guide/image-20241029115047877.png)
 
 
 ## 问题反馈
