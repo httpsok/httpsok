@@ -44,7 +44,7 @@ After installation, the script will automatically detect the `nginx` certificate
 
 **According to the actual situation of the script**, add the corresponding DNS records. [DNS configuration reference](https://httpsok.com/doc/guide/dns.html)
 
-![httsok-DNS Configuration Example](https://cdn.httpsok.com/doc/assets/guide/image-20240314024435126.png)
+![httsok-DNS Configuration Example](https://cdn.httpsok.com/doc/assets/guide/image-20250115041129964.png)
 
 ### 3. Done
 

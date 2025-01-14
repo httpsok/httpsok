@@ -46,7 +46,7 @@
 
 **根据脚本运行的实际情况**，添对应的的DNS解析记录。[DNS解析配置参考](https://httpsok.com/doc/guide/dns.html)
 
-![httsok-DNS解析配置示例](https://cdn.httpsok.com/doc/assets/guide/image-20240314024435126.png)
+![httsok-DNS解析配置参考](https://cdn.httpsok.com/doc/assets/guide/image-20250115041129964.png)
 
 ### 三、完成
 
