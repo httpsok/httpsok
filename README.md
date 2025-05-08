@@ -1,7 +1,7 @@
 <p align="center"><a href="https://httpsok.com/doc/" target="_blank"><img width="168" src="https://cdn.httpsok.com/doc/assets/httpsok-logo.png" alt="httpsok logo"></a></p>
 
 <p align="center">
-  <a href="https://gitcode.com/httpsok/httpsok" class="link github-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="Gitcode Repo stars" src="https://gitcode.com/httpsok/httpsok/star/badge.svg"></a>
+  <a href="https://gitcode.com/httpsok/httpsok" class="link gitcode-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="Gitcode Repo stars" src="https://gitcode.com/httpsok/httpsok/star/badge.svg"></a>
   <a href="https://github.com/httpsok/httpsok" class="link github-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/httpsok/httpsok?style=social"></a>
   <a href="https://gitee.com/httpsok/httpsok" class="link gitee-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="gitee Repo stars" src="https://gitee.com/httpsok/httpsok/badge/star.svg"></a>
   <img style="max-width: 100px; max-height: 30px;" alt="csharp" src="https://img.shields.io/badge/language-shell-brightgreen.svg">
