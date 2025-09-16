@@ -12,7 +12,7 @@ NGINX_BIN=nginx
 # NGINX_CONFIG_HOME=/etc/nginx
 ##################################################
 
-VER=1.18.0
+VER=1.18.2
 
 PROJECT_NAME="httpsok"
 PROJECT_ENTRY="httpsok.sh"
@@ -156,7 +156,7 @@ _init_params() {
   fi
 
   if [ -f /etc/os-release ]; then
-      OS=$(grep 'PRETTY_NAME' /etc/os-release | awk -F '=' '{print $2}' | tr -d '"')
+      OS=$(grep 'PRETTY_NAME' /etc/os-release | awk -F '=' '{print $2}' | tr -d '"' | head -n 1)
   elif [ -f /etc/redhat-release ]; then
       OS=$(cat /etc/redhat-release)
   elif [ -f /etc/alpine-release ]; then
@@ -600,7 +600,11 @@ __process_include() {
 _preparse() {
   _init_params
 
-  config_text=$(cat $NGINX_CONFIG | __process_include )
+
+  config_text=$($NGINX_BIN -T)
+  if [ "$?" != "0" ]; then
+    config_text=$(cat $NGINX_CONFIG | __process_include )
+  fi
   tmp_name="/tmp/2nLN3ZspTMGifYtO.tmp"
   echo "$config_text" > $tmp_name
   preparse=$(_post2 "/preparse" "$tmp_name")
