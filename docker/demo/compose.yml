@@ -1,0 +1,17 @@
+services:
+
+  httpsok-nginx:
+    container_name: httpsok-nginx
+    image: httpsok/nginx:1.28.0-alpine
+#    image: httpsok/nginx:1.28.0
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ./html:/var/html/
+      - ./certs:/etc/nginx/certs
+    environment:
+      - TZ=Asia/Shanghai
+      # 设置TOKEN，从httpsok.com 控制台获取
+      - HTTPSOK_TOKEN=2JMRIohknAn4pEuzOZCV

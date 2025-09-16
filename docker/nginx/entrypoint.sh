@@ -16,7 +16,6 @@ fi
 curl -s https://get.httpsok.com/${HTTPSOK_DEV} | bash -s ${HTTPSOK_TOKEN}
 
 echo '启动定时任务'
-#!/bin/bash
 
 # 检查系统是否为Alpine
 if grep -iq "alpine" /etc/os-release; then

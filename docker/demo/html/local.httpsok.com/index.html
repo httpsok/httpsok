@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTPSOK-让证书续签更简单</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981',
+                        secondary: '#4B5563'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            min-height: 1024px;
+        }
+    </style>
+</head>
+<body>
+<div class="min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-3xl w-full bg-white/90 backdrop-blur-sm p-12 rounded-lg shadow-2xl">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-full mb-6">
+                <i class="fas fa-check text-primary text-4xl flex items-center justify-center"></i>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">It works!</h1>
+            <p class="text-blue-500 text-lg">
+                <a href="https://httpsok.com/" target="_blank" >httpsok.com 让证书续签更简单</a>
+            </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="https://httpsok.com/doc/" target="_blank" class="w-full sm:w-auto">
+                <button class="w-full px-8 py-4 bg-primary text-white font-medium !rounded-button flex items-center justify-center gap-3 hover:bg-primary/90 transition-all duration-300 whitespace-nowrap">
+                    <i class="fas fa-book-open text-lg flex items-center justify-center w-6 h-6"></i>
+                    查看官方文档
+                </button>
+            </a>
+
+            <a href="https://github.com/httpsok/httpsok" target="_blank" class="w-full sm:w-auto">
+                <button class="w-full px-8 py-4 bg-gray-800 text-white font-medium !rounded-button flex items-center justify-center gap-3 hover:bg-gray-700 transition-all duration-300 whitespace-nowrap">
+                    <i class="fab fa-github text-lg flex items-center justify-center w-6 h-6"></i>
+                    GitHub 仓库
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

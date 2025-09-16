@@ -15,15 +15,16 @@ services:
       - "443:443"
     # 挂载
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
-      - ./html:/var/html/
-      - ./certs:/etc/nginx/certs
+      - ../demo/conf.d:/etc/nginx/conf.d
+      - ../demo/html:/var/html/
+      - ../demo/certs:/etc/nginx/certs
     # 环境变量
     environment:
       # 设置时区为东八区
       - TZ=Asia/Shanghai
       # 设置TOKEN，从httpsok.com 控制台获取
-#      - HTTPSOK_TOKEN=
+      - HTTPSOK_TOKEN=2JMRIohknAn4pEuzOZCV
+      - HTTPSOK_DEV=dev.sh
 
   httpsok-nginx:
     # 构建
@@ -40,12 +41,13 @@ services:
       - "443:443"
     # 挂载
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
-      - ./html:/var/html/
-      - ./certs:/etc/nginx/certs
+      - ../demo/conf.d:/etc/nginx/conf.d
+      - ../demo/html:/var/html/
+      - ../demo/certs:/etc/nginx/certs
     # 环境变量
     environment:
       # 设置时区为东八区
       - TZ=Asia/Shanghai
       # 设置TOKEN，从httpsok.com 控制台获取
-#      - HTTPSOK_TOKEN=
+      - HTTPSOK_TOKEN=2JMRIohknAn4pEuzOZCV
+      - HTTPSOK_DEV=dev.sh
