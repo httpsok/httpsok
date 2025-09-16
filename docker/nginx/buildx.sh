@@ -8,5 +8,9 @@ docker buildx build --platform linux/amd64,linux/arm64 -t httpsok/nginx:1.24.0-a
 docker buildx build --platform linux/amd64,linux/arm64 -t httpsok/nginx:1.24.0 --push -f Dockerfile .
 
 # 本地构建镜像并且测试
-#COMPOSE_BAKE=true docker-compose build httpsok-nginx-alpine
+# COMPOSE_BAKE=true docker-compose build httpsok-nginx-alpine
+# docker-compose up httpsok-nginx-alpine
+
+# COMPOSE_BAKE=true docker-compose build httpsok-nginx
+# docker-compose up httpsok-nginx
 
