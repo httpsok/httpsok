@@ -1,8 +1,8 @@
-FROM nginx:1.25.5
+FROM nginx:1.26.2
 
 LABEL maintainer="httpsok.com" \
       description="Nginx with HTTPSOK integration" \
-      version="1.25.5"
+      version="1.26.2"
 
 ENV HTTPSOK_TOKEN=""
 
