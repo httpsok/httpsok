@@ -1,0 +1,21 @@
+FROM nginx:1.29.1-alpine
+
+LABEL maintainer="httpsok.com" \
+      description="Nginx with HTTPSOK integration" \
+      version="1.29.1"
+
+ENV HTTPSOK_TOKEN=""
+
+RUN apk update && apk add --no-cache --virtual .runtime-deps bash && rm -rf /var/cache/apk/*
+
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+EXPOSE 80
+
+STOPSIGNAL SIGQUIT
+
+CMD ["nginx", "-g", "daemon off;"]
