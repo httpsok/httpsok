@@ -1,0 +1,51 @@
+services:
+
+  httpsok-nginx-alpine:
+    # 构建
+    build:
+      context: .
+      dockerfile: Dockerfile-alpine
+    # 设置容器名称
+    container_name: httpsok-nginx-alpine
+    # 镜像
+    image: httpsok/nginx:1.28.0-alpine
+    # 端口
+    ports:
+      - "80:80"
+      - "443:443"
+    # 挂载
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ./html:/var/html/
+      - ./certs:/etc/nginx/certs
+    # 环境变量
+    environment:
+      # 设置时区为东八区
+      - TZ=Asia/Shanghai
+      # 设置TOKEN，从httpsok.com 控制台获取
+#      - HTTPSOK_TOKEN=
+
+  httpsok-nginx:
+    # 构建
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # 设置容器名称
+    container_name: httpsok-nginx
+    # 镜像
+    image: httpsok/nginx:1.28.0
+    # 端口
+    ports:
+      - "80:80"
+      - "443:443"
+    # 挂载
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ./html:/var/html/
+      - ./certs:/etc/nginx/certs
+    # 环境变量
+    environment:
+      # 设置时区为东八区
+      - TZ=Asia/Shanghai
+      # 设置TOKEN，从httpsok.com 控制台获取
+#      - HTTPSOK_TOKEN=

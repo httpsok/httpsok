@@ -1,4 +1,4 @@
-FROM nginx:1.28.0-alpine
+FROM nginx:1.28.0
 
 LABEL maintainer="httpsok.com" \
       description="Nginx with HTTPSOK integration" \
@@ -6,9 +6,9 @@ LABEL maintainer="httpsok.com" \
 
 ENV HTTPSOK_TOKEN=""
 
-RUN apk update && \
-    apk add --no-cache --virtual .runtime-deps bash && \
-    rm -rf /var/cache/apk/*
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y cron procps && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /entrypoint.sh
 
