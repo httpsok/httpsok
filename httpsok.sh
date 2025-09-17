@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # WIKI: https://httpsok.com/doc/
 # This script only supports bash, do not support posix sh.
@@ -191,7 +191,11 @@ _init_params() {
   # user can setting
   if [ -z "$NGINX_CONFIG" ]; then
     # Use a running nginx first
-    NGINX_CONFIG=$(ps -eo pid,cmd | grep nginx | grep master | grep '\-c' | awk -F '-c' '{print $2}' | sed 's/ //g')
+    if ps -eo pid,cmd 2>&1;then
+      NGINX_CONFIG=$(ps -eo pid,cmd | grep nginx | grep master | grep '\-c' | awk -F '-c' '{print $2}' | sed 's/ //g')
+    else
+      NGINX_CONFIG=$(ps -e| grep nginx | grep master | grep '\-c' | awk -F '-c' '{print $2}' | sed 's/ //g')
+    fi
   fi
 
   # fix the NGINX_CONFIG equals nginx.conf bug
@@ -879,7 +883,7 @@ _uninstall() {
   showWelcome
   echo "If your need install httpsok agian. Please see $HTTPSOK_HOME_URL .
 
-curl -s $SCRIPT_URL | bash -s 'your token'
+curl -s $SCRIPT_URL | /bin/sh -s 'your token'
 
 "
 }
