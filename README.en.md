@@ -1,4 +1,4 @@
-<p align="center"><a href="https://httpsok.com/doc/" target="_blank"><img width="168" src="https://cdn.httpsok.com/doc/assets/httpsok-logo.png" alt="httpsok logo"></a></p>
+<p align="center"><a href="https://httpsok.com/doc/" target="_blank"><img width="168" src="https://cdn.httpsok.com/assets/logo.png" alt="httpsok logo"></a></p>
 
 <p align="center">
   <a href="https://gitcode.com/httpsok/httpsok" class="link gitcode-link" target="_blank"><img style="max-width: 100px; max-height: 30px;" alt="Gitcode Repo stars" src="https://gitcode.com/httpsok/httpsok/star/badge.svg"></a>
