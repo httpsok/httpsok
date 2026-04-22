@@ -8,7 +8,7 @@ services:
     # 设置容器名称
     container_name: httpsok-nginx-alpine
     # 镜像
-    image: httpsok/nginx:1.27.5-alpine
+    image: httpsok/nginx:1.29.8-alpine
     # 端口
     ports:
       - "80:80"
@@ -24,7 +24,7 @@ services:
       - TZ=Asia/Shanghai
       # 设置TOKEN，从httpsok.com 控制台获取
       - HTTPSOK_TOKEN=2JMRIohknAn4pEuzOZCV
-      - HTTPSOK_DEV=dev.sh
+#      - HTTPSOK_DEV=dev.sh
 
   httpsok-nginx:
     # 构建
@@ -34,7 +34,7 @@ services:
     # 设置容器名称
     container_name: httpsok-nginx
     # 镜像
-    image: httpsok/nginx:1.27.5
+    image: httpsok/nginx:1.29.8
     # 端口
     ports:
       - "80:80"
@@ -50,4 +50,4 @@ services:
       - TZ=Asia/Shanghai
       # 设置TOKEN，从httpsok.com 控制台获取
       - HTTPSOK_TOKEN=2JMRIohknAn4pEuzOZCV
-      - HTTPSOK_DEV=dev.sh
+#      - HTTPSOK_DEV=dev.sh
