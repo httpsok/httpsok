@@ -2,7 +2,7 @@ services:
 
   httpsok-nginx:
     container_name: httpsok-nginx
-    image: httpsok/nginx:1.31.3-alpine
+    image: httpsok/nginx:1.31.9-alpine
 #    image: httpsok/nginx:1.28.0
     ports:
       - "80:80"
